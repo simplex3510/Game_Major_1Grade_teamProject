@@ -21,5 +21,11 @@
     <ClCompile Include="Client.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="maps.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="concols.c">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

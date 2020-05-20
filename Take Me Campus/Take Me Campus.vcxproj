@@ -139,7 +139,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client.c" />
+    <ClCompile Include="concols.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="maps.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
