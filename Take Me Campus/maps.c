@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+// space_bar: 32
+// up:		224, 72
+// down:	224, 80
+// left:	224, 75
+// right:	224, 77
 
 void stage1()
 {
