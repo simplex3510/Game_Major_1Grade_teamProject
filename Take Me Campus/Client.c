@@ -1,58 +1,41 @@
-#include <stdio.h>
-#include <conio.h>
-#include <time.h>
-#include <malloc.h>
-#include <windows.h>
+#include <stdio.h>			// 표준 입출력 헤더
+#include <time.h>			// 시간과 관련된 함수 헤더
+#include <conio.h>			// 입출력, 표준에서 벗어남
+#include <string.h>
 
-#include "screen.h"
+#include "fps.h"			// fps 출력 헤더
+#include "screen.h"			// 렌더링 처리 헤더
 
 #pragma warning (disable:4996)
 
 #define TRUE 1
 
-clock_t FPSCurTime, FPSOldTime;
-int FrameCnt;
-char* FPSTextBuffer;
+FPSData* fpsData;
 
+char PLAYER_STR[] = "●";
 
-//void input_key()
-//{
-//	int key;
-//	while (TRUE) {
-//
-//		if (_kbhit()) {
-//
-//			key = getch();
-//			if (key == 224) {
-//				key = _getch();
-//
-//				switch (key) {
-//				case 72:
-//					printf("↑");
-//					break;
-//				case 80:
-//					printf("↓");
-//					break;
-//				case 75:
-//					printf("←");
-//					break;
-//				case 77:
-//					printf("→");
-//					break;
-//				}
-//			}
-//		}
-//	}
-//
-//	return;
-//}
+typedef struct {
+	int x, y;
+} Position;
+
+typedef struct {
+	Position position;
+	char* strPlayer;
+	int playerLen;
+} Player;
+
+Player player;
 
 void init()
 {
-	FrameCnt = 0;
-	FPSTextBuffer = (char*)malloc(sizeof(char) * 10);
-	sprintf(FPSTextBuffer, "FPS:%d", FrameCnt);
-	FPSOldTime = clock();
+	initFPSData(&fpsData);
+	player.position.x = 1;
+	player.position.y = 22;
+
+	player.playerLen = strlen(PLAYER_STR);
+
+	player.strPlayer = (char*)malloc(sizeof(char) * player.playerLen);
+	strcpy(player.strPlayer, PLAYER_STR);
 }
 
 void update()
@@ -63,82 +46,101 @@ void update()
 void render()
 {
 	screenClear();
+	drawFPS(&fpsData);
 
-	FrameCnt++;
-	FPSCurTime = clock();
+	char string[30][150] = { 0, };
 
-	if (FPSCurTime - FPSOldTime >= 1000)
-	{
-		sprintf(FPSTextBuffer, "FPS:%d", FrameCnt);
-		FPSOldTime = clock();
-		FrameCnt = 0;
-	}
+	screenPrint(player.position.x, player.position.y, player.strPlayer);
 
-	screenPrint(0, 0, FPSTextBuffer);
-
+	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
+	screenPrint(0, 3, string);
 	screenFlipping();
-
 }
 
-// 화면 출력 함수
+// 동적 할당 해제
 void release()
 {
-	free(FPSTextBuffer);
+	destoyFPSData(&fpsData);
 }
+
+void waitRender(clock_t oldTime)
+{
+	clock_t curTime;
+	while (TRUE) {
+
+		curTime = clock();					// 렌더 후의 시간을 지속적으로 갱신
+		if (16 < curTime - oldTime)			// 두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출
+			break;
+	}
+}
+
+int getKeyEvent()
+{
+	int key1, key2;
+	if (_kbhit()) {					// 키보드 입력 인식
+		key1 = _getch();			// 방향키 첫 번째 아스키 코드 값 저장
+
+		if (key1 == 27)			// esc키 입력
+			return key1;		// 해당 키보드 값 반환
+
+		key2 = _getch();		// 방향키 두 번째 아스키 코드 값 저장
+		if (key1 == 224)			// 방향키가 입력되었을 때
+			return key1, key2;			// 방향키 입력값 반환
+		
+			
+	}
+
+	return -1;						// 방향키 입력이 아니면 -1 반환
+}
+
+void keyProcess(int key2)
+{
+
+	switch (key2) {					// 값에 따라 방향키 케이스 분할
+	case 80:
+		printf("↑");
+		++player.position.y;
+		break;
+	case 72:
+		printf("↓");
+		--player.position.y;
+		break;
+	case 75:
+		//printf("←");
+		--player.position.x;
+		break;
+	case 77:
+		//printf("→");
+		++player.position.x;
+		break;
+	}
+}
+
 
 int main()
 {
-	int key;
+	screenInit();	// 스크린 초기화
+	init();			// 게임 초기화
 
-	// 틱을 저장하는 형식
-	clock_t curTime, oldTime;
-
-	screenInit();
-	init();
+	int nKey;
 
 	while (TRUE) {
-		
-		if (_kbhit()) {
-			key = getch();
-			if (key == 224) {
-				key = getch();
 
-				switch (key) {
-				case 72:
-					printf("↑");
-					break;
-				case 80:
-					printf("↓");
-					break;
-				case 75:
-					printf("←");
-					break;
-				case 77:
-					printf("→");
-					break;
-				}
-			}
-		}
+		nKey = getKeyEvent();
+		if (nKey == 27)		// ESC 입력
+			break;				// 반복 탈출 후, 게임 종료
 
-		oldTime = clock();						// (프로그램이 시작될 때부터 지난 틱의 수 반환) = (렌더 전의 시간을 입력, 이후 대기 상태)
-		
+		keyProcess(nKey);		// 
 
-		update();	// 데이터 업데이트
-		render();	// 그래픽 렌더링
 
-		while (TRUE) {
-			
-			curTime = clock();					// 렌더 후의 시간을 지속적으로 갱신
-			if (33 < curTime - oldTime)			// 두 시간의 차가 33ms일 때 대기상태 탈출
-				break;
-		}
+		update();				// 데이터 업데이트
+
+		render();				// 그래픽 렌더링
+		waitRender(clock());
 	}
 
-	release();	// 해제
-	screenRelease();
-
-	return 0;
-
+	release();					// 동적할당 헤제
+	screenRelease();			// 스크린 동적 할당 해제
 
 	/*system("cls");
 	system("title Take Me Campus");
@@ -151,4 +153,6 @@ int main()
 
 
 	return 0;*/
+
+	return 0;
 }

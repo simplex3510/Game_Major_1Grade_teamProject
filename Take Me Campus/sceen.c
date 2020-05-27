@@ -1,5 +1,16 @@
 #include <windows.h>
 
+#pragma once
+#pragma warning (disable:4996)
+
+/*
+static의 사용 경우
+ 1. 프로그램이 실행되는 동안에 계속해서 유지해야 할 변수가 필요
+ 2. 그 변수에 접근하는 영역이 하나의 함수 일 때
+    
+    => ∴ 아래의 두 변수는 항상 유지되며, screen.c 에서만 접근한다.
+*/
+
 static int g_nScreenIndex;      // 출력 버퍼 인덱스 변수
 static HANDLE g_hScreen[2];     // 더블 버퍼용 배열 (크기 2 = 2개)
 
@@ -8,7 +19,8 @@ void screenInit()
 {
     CONSOLE_CURSOR_INFO cci;
 
-    //화면 버퍼 2개를 만든다.
+    //화면 버퍼 생성 및 설정
+    // 매개 변수 = (콘솔 화면 버퍼에 대한 액세스, 버퍼 공유 여부, 상속의 여부, )
     g_hScreen[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE,
         0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
     g_hScreen[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE,
