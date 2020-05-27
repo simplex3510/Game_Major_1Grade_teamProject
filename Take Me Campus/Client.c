@@ -14,6 +14,7 @@
 FPSData* fpsData;	//
 
 char PLAYER_STR[] = "●";
+char PLAYER_STR_R[] = "●■";
 
 typedef struct {
 	int x, y;		// 플레이어 좌표
@@ -22,6 +23,7 @@ typedef struct {
 typedef struct {
 	Position position;		// 플레이어 좌표
 	char* strPlayer;		// 플레이어 그래픽
+	char* strPlayer_R;		// 오른쪽 예외
 	int playerLen;			// 플레이어 길이
 } Player;
 
@@ -30,13 +32,15 @@ Player player;		// 플레이어 선언
 void init()
 {
 	initFPSData(&fpsData);
-	player.position.x = 2;
+	player.position.x = 2;		// 플레이어 초기 좌표
 	player.position.y = 22;
 
 	player.playerLen = strlen(PLAYER_STR);
 
 	player.strPlayer = (char*)malloc(sizeof(char) * player.playerLen);
 	strcpy(player.strPlayer, PLAYER_STR);
+	player.strPlayer_R = (char*)malloc(sizeof(char) * (player.playerLen + 2));
+	strcpy(player.strPlayer_R, PLAYER_STR_R);
 }
 
 void update()
@@ -47,18 +51,23 @@ void update()
 void render()
 {
 	screenClear();
-	//drawFPS(&fpsData);
+	drawFPS(&fpsData);
+
+	stage1();
 
 	char string[100] = { 0, };
 
 	// 왼쪽으로 벗어나는 경우 - 클리핑 기술 활용
-	if (player.position.x < 0) {
+	if (player.position.x < 2) {
 		screenPrint(0, player.position.y, &player.strPlayer[0]);
 		player.position.x += 2;
 	}
+	else if (122 == player.position.x + 1) {
+		screenPrint(122, player.position.y, &player.strPlayer_R[0]);
+	}
 	// 오른쪽으로 벗어나는 경우
-	else if (122 < player.position.x) {
-		screenPrint(122, player.position.y, &player.strPlayer[0]);
+	else if (123 < player.position.x + 1) {
+		screenPrint(122, player.position.y, &player.strPlayer_R[0]);
 		player.position.x -= 2;
 	}
 	// 아래쪽으로 벗어나는 경우
@@ -72,8 +81,8 @@ void render()
 
 
 	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
-	stage1();
-	screenPrint(0, 3, string);
+	
+	screenPrint(10, 0, string);
 	screenFlipping();
 }
 
