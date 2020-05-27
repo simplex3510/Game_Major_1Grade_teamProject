@@ -10,21 +10,21 @@
 
 #define TRUE 1
 
-FPSData* fpsData;
+FPSData* fpsData;	//
 
 char PLAYER_STR[] = "●";
 
 typedef struct {
-	int x, y;
+	int x, y;		// 플레이어 좌표
 } Position;
 
 typedef struct {
-	Position position;
-	char* strPlayer;
-	int playerLen;
+	Position position;		// 플레이어 좌표
+	char* strPlayer;		// 플레이어 그래픽
+	int playerLen;			// 플레이어 길이
 } Player;
 
-Player player;
+Player player;		// 플레이어 선언
 
 void init()
 {
@@ -143,18 +143,6 @@ int main()
 
 	release();					// 동적할당 헤제
 	screenRelease();			// 스크린 동적 할당 해제
-
-	/*system("cls");
-	system("title Take Me Campus");
-	system("mode con cols=122 lines=40");
-	system("color F0");
-
-	stage1();
-
-	input_key();
-
-
-	return 0;*/
 
 	return 0;
 }

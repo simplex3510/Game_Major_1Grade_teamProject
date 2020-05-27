@@ -53,7 +53,8 @@ void screenClear()
     // dw값은 버퍼에 실제 기록된 문자수를 받는 변수 포인터
     DWORD dw;
     // 버퍼에, (공백)을 채운다, 80*25 만큼, (0, 0)(Coor)부터 시작하여
-    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 122 * 40, Coor, &dw);     
+    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 122 * 40, Coor, &dw);
+    
 }
 
 // 화면 해제
