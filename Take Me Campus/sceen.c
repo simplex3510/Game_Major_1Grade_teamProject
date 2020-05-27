@@ -53,7 +53,7 @@ void screenClear()
     // dw값은 버퍼에 실제 기록된 문자수를 받는 변수 포인터
     DWORD dw;
     // 버퍼에, (공백)을 채운다, 80*25 만큼, (0, 0)(Coor)부터 시작하여
-    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 122 * 40, Coor, &dw);
+    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 122 * 43, Coor, &dw);
     
 }
 
@@ -83,3 +83,12 @@ void setColor(unsigned short color)
     // 버퍼 지정, 색상 설정
     SetConsoleTextAttribute(g_hScreen[g_nScreenIndex], color);
 }
+
+//void title()
+//{
+//    char string[100] = { 0, };
+//
+//    screenPrint(50, 3, "타이틀 화면");
+//
+//    return;
+//}

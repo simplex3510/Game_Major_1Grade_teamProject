@@ -18,3 +18,6 @@ void screenPrint(int x, int y, char* string);
 
 // 화면에 출력할 문자 색상값 지정
 void setColor(unsigned short color);
+
+// 타이틀
+void title();

@@ -5,6 +5,7 @@
 
 #include "fps.h"			// fps 출력 헤더
 #include "screen.h"			// 렌더링 처리 헤더
+#include "maps.h"
 
 #pragma warning (disable:4996)
 
@@ -29,7 +30,7 @@ Player player;		// 플레이어 선언
 void init()
 {
 	initFPSData(&fpsData);
-	player.position.x = 1;
+	player.position.x = 2;
 	player.position.y = 22;
 
 	player.playerLen = strlen(PLAYER_STR);
@@ -46,15 +47,32 @@ void update()
 void render()
 {
 	screenClear();
-	drawFPS(&fpsData);
+	//drawFPS(&fpsData);
 
 	char string[100] = { 0, };
 
-	screenPrint(player.position.x, player.position.y, player.strPlayer);
-
+	// 왼쪽으로 벗어나는 경우 - 클리핑 기술 활용
+	if (player.position.x < 0) {
+		screenPrint(0, player.position.y, &player.strPlayer[0]);
+		player.position.x += 2;
+	}
+	// 오른쪽으로 벗어나는 경우
+	else if (122 < player.position.x) {
+		screenPrint(122, player.position.y, &player.strPlayer[0]);
+		player.position.x -= 2;
+	}
+	// 아래쪽으로 벗어나는 경우
+	else if (40 <= player.position.y) {
+		screenPrint(39, player.position.x, &player.strPlayer[0]);
+		player.position.y -= 1;
+	}
+	else {
+		screenPrint(player.position.x, player.position.y, player.strPlayer);
+	}
 
 
 	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
+	stage1();
 	screenPrint(0, 3, string);
 	screenFlipping();
 }
@@ -133,7 +151,6 @@ int main()
 			break;				// 반복 탈출 후, 게임 종료
 
 		keyProcess(nKey);		// 
-
 
 		update();				// 데이터 업데이트
 

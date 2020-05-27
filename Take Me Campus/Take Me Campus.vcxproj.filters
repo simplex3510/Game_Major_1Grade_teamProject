@@ -30,12 +30,18 @@
     <ClCompile Include="fps.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="title.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="screen.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="fps.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="maps.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
