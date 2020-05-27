@@ -48,9 +48,11 @@ void render()
 	screenClear();
 	drawFPS(&fpsData);
 
-	char string[30][150] = { 0, };
+	char string[100] = { 0, };
 
 	screenPrint(player.position.x, player.position.y, player.strPlayer);
+
+
 
 	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
 	screenPrint(0, 3, string);
@@ -99,19 +101,19 @@ void keyProcess(int key2)
 	switch (key2) {					// 값에 따라 방향키 케이스 분할
 	case 80:
 		printf("↑");
-		++player.position.y;
+		player.position.y += 1;
 		break;
 	case 72:
 		printf("↓");
-		--player.position.y;
+		player.position.y -= 1;
 		break;
 	case 75:
 		//printf("←");
-		--player.position.x;
+		player.position.x -= 2;
 		break;
 	case 77:
 		//printf("→");
-		++player.position.x;
+		player.position.x += 2;
 		break;
 	}
 }

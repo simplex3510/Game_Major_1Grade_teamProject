@@ -17,9 +17,11 @@ static HANDLE g_hScreen[2];     // 더블 버퍼용 배열 (크기 2 = 2개)
 // 스크린 초기화(초기 설정)
 void screenInit()
 {
+    system("mode con cols=122 lines=40");
+
     CONSOLE_CURSOR_INFO cci;
 
-    //화면 버퍼 생성 및 설정
+    // 화면 버퍼 생성 및 설정
     // 매개 변수 = (콘솔 화면 버퍼에 대한 액세스, 버퍼 공유 여부, 상속의 여부, )
     g_hScreen[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE,
         0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
@@ -49,7 +51,7 @@ void screenClear()
     // dw값은 버퍼에 실제 기록된 문자수를 받는 변수 포인터
     DWORD dw;
     // 버퍼에, (공백)을 채운다, 80*25 만큼, (0, 0)(Coor)부터 시작하여
-    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 80 * 25, Coor, &dw);     
+    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 80 * 28, Coor, &dw);     
 }
 
 // 화면 해제
