@@ -1,7 +1,7 @@
 #include <stdio.h>			// 표준 입출력 헤더
-#include <time.h>			// 시간과 관련된 함수 헤더
 #include <conio.h>			// 입출력, 표준에서 벗어남
 #include <string.h>
+#include <windows.h>
 
 #include "fps.h"			// fps 출력 헤더
 #include "screen.h"			// 렌더링 처리 헤더
@@ -12,21 +12,19 @@
 
 #define TRUE 1
 
-FPSData* fpsData;	//
+FPSData* fpsData;	// fpsData를 FPSData 포인터 형식으로 선언 
 
-Object player;
-Object potal;
+Object player;		// 플레이어 오브젝트 선언
+Object potal;		// 포탈 오브젝트 선언
 
 static stage = 1;
 
 
 void init()
 {
-	initFPSData(&fpsData);
+	initFPSData(&fpsData);		// FPS 초기화
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
-
-
 }
 
 void update()
@@ -35,28 +33,34 @@ void update()
 	static count = 0;
 	player.bounce.isJump = 1;
 
-	// 점프하고 있는 시간이, 
-	// if (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
-	while (TRUE) {
+	// 즉, 최근 시간과 이전 시간을 빼면 시간차가 나오는데, 이게 일정 수준보다 커야함
+	// -> 점프와 점프 사이의 시간적 간격 = 점프 속도
+	// 점프와 점프사이의 시간차 < (최근시간 - 이전 시간)
+	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
 
 		// 최고점이 아니라면, 상승한다.
 		if (player.bounce.isTop == 0) {
 			player.position.y--;
 			count++;
-			if (count == 3) player.bounce.isTop = 1;
+			// 최고점에 달았을 경우, 
+			if (count == 3) { player.bounce.isTop = 1; }
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+
 			return;
 		}
 		// 최고점이라면, 하강한다.
 		else if (player.bounce.isTop == 1) {
 			player.position.y++;
 			count++;
+			// 다시 내려왔을 경우
 			if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 			return;
 		}
 	}
 }
 
-
+// 화면에 출력
 void render()
 {
 	screenClear();
@@ -65,7 +69,7 @@ void render()
 	char string[100] = { 0, };
 	static stage = 1;
 
-	// 스테이지 클리어
+	// 포탈 충돌 체크, 다음 스테이지
 	if ((player.position.x == potal.position.x) &&
 		(player.position.y == potal.position.y)) {
 		stage++;
@@ -109,8 +113,8 @@ void render()
 	}
 	// 일반 렌더링
 	else {
-		screenPrint(potal.position.x, potal.position.y, potal.strPlayer);
-		screenPrint(player.position.x, player.position.y, player.strPlayer);
+		screenPrint(potal.position.x, potal.position.y, potal.strPlayer);		// 포탈 렌더링
+		screenPrint(player.position.x, player.position.y, player.strPlayer);	// 플레이어 렌더링
 	}
 
 	screenPrint(10, 0, string);
@@ -120,12 +124,15 @@ void render()
 // 동적 할당 해제
 void release()
 {
-	destoyFPSData(&fpsData);
+	// FPS 관련 동적할당 2개 해제
+	freeFPSData(&fpsData);
 
-	// 캐릭터, 포탈, 
-
+	// 캐릭터, 포탈 동적할당 해제
+	//freeObject(&player);
+	//freeObject(&potal);
 }
 
+// 프레임 조정
 void waitRender(clock_t oldTime)
 {
 	clock_t curTime;
@@ -137,25 +144,30 @@ void waitRender(clock_t oldTime)
 	}
 }
 
+// 키 인식
 int getKeyEvent()
 {
+	clock_t curTime;
+	curTime = clock();
+
 	int key1, key2;
-	if (_kbhit()) {					// 키보드 입력 인식
-		key1 = _getch();			// 방향키 첫 번째 아스키 코드 값 저장
 
-		if (key1 == 27)			// esc키 입력
-			return key1;		// 해당 키보드 값 반환
+	if (_kbhit()) {						// 키보드 입력 인식
+		key1 = _getch();				// 방향키 첫 번째 아스키 코드 값 저장
 
-		key2 = _getch();		// 방향키 두 번째 아스키 코드 값 저장
-		if (key1 == 224)			// 방향키가 입력되었을 때
+		if (key1 == 27)					// esc키 입력
+
+			return key1;				// 해당 키보드 값 반환
+
+		key2 = _getch();				// 방향키 두 번째 아스키 코드 값 저장
+		if (key1 == 224)				// 방향키가 입력되었을 때
 			return key1, key2;			// 방향키 입력값 반환
-
-
 	}
 
 	return -1;						// 방향키 입력이 아니면 -1 반환
 }
 
+// 인식된 키에 대응하는 명령 실행
 void keyProcess(int key2)
 {
 
@@ -186,6 +198,7 @@ int main()
 
 	int nKey;
 
+	// 메인 루프
 	while (TRUE) {
 
 		nKey = getKeyEvent();
@@ -202,6 +215,8 @@ int main()
 
 	release();					// 동적할당 헤제
 	screenRelease();			// 스크린 동적 할당 해제
+
+	printf("Thank you for your playing!");
 
 	return 0;
 }

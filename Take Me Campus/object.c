@@ -11,7 +11,7 @@ char POTAL_STR[] = "★";
 void player_init(Object* player)
 {
 	player->bounce.isJump = 1;
-	player->bounce.jumpTime = 100;
+	player->bounce.jumpTime = 70;
 	player->bounce.isTop = 0;
 
 	player->position.x = 2;		// 플레이어 초기 좌표
@@ -60,7 +60,7 @@ void potal_position(Object* potal, int stage)
 	return;
 }
 
-//void destroyObject(Object* object)
+//void freeObject(Object* object)
 //{
 //	free(object->strPlayer);
 //

@@ -14,7 +14,9 @@ typedef struct
     /* 프레임 조절을 위한 2개의 시간 변수 선언
        두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출 */
     clock_t fpsCurTime, fpsOldTime;
+    // 프레임 수
     int frameCnt;
+    // 프레임 카운트를 출력할 버퍼
     char* fpsTextBuffer;
 }FPSData;
 
@@ -24,5 +26,5 @@ void initFPSData(FPSData** fpsData);
 // FPS 출력
 void drawFPS(FPSData** fpsData);
 
-// Free
-void destoyFPSData(FPSData** fpsData);
+// 동적 할당 해제
+void freeFPSData(FPSData** fpsData);
