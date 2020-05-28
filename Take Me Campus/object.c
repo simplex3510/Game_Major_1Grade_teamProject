@@ -10,6 +10,10 @@ char POTAL_STR[] = "★";
 
 void player_init(Object* player)
 {
+	player->bounce.isJump = 1;
+	player->bounce.jumpTime = 100;
+	player->bounce.isTop = 0;
+
 	player->position.x = 2;		// 플레이어 초기 좌표
 	player->position.y = 23;
 

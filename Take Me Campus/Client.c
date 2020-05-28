@@ -24,13 +24,38 @@ void init()
 {
 	initFPSData(&fpsData);
 	player_init(&player);		// 플레이어 초기화
-	potal_init(&potal, stage);
+	potal_init(&potal, stage);	// 포탈 초기화
+
+
 }
 
 void update()
 {
+	clock_t curTime = clock();
+	static count = 0;
+	player.bounce.isJump = 1;
 
+	// 점프하고 있는 시간이, 
+	// if (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
+	while (TRUE) {
+
+		// 최고점이 아니라면, 상승한다.
+		if (player.bounce.isTop == 0) {
+			player.position.y--;
+			count++;
+			if (count == 3) player.bounce.isTop = 1;
+			return;
+		}
+		// 최고점이라면, 하강한다.
+		else if (player.bounce.isTop == 1) {
+			player.position.y++;
+			count++;
+			if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
+			return;
+		}
+	}
 }
+
 
 void render()
 {
@@ -48,7 +73,7 @@ void render()
 	}
 
 	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
-	
+
 	switch (stage)
 	{
 	case 1:
@@ -87,7 +112,7 @@ void render()
 		screenPrint(potal.position.x, potal.position.y, potal.strPlayer);
 		screenPrint(player.position.x, player.position.y, player.strPlayer);
 	}
-	
+
 	screenPrint(10, 0, string);
 	screenFlipping();
 }
@@ -98,7 +123,7 @@ void release()
 	destoyFPSData(&fpsData);
 
 	// 캐릭터, 포탈, 
-	
+
 }
 
 void waitRender(clock_t oldTime)
@@ -124,8 +149,8 @@ int getKeyEvent()
 		key2 = _getch();		// 방향키 두 번째 아스키 코드 값 저장
 		if (key1 == 224)			// 방향키가 입력되었을 때
 			return key1, key2;			// 방향키 입력값 반환
-		
-			
+
+
 	}
 
 	return -1;						// 방향키 입력이 아니면 -1 반환
@@ -136,11 +161,11 @@ void keyProcess(int key2)
 
 	switch (key2) {					// 값에 따라 방향키 케이스 분할
 	case 80:
-		printf("↑");
+		//printf("↑");
 		player.position.y += 1;
 		break;
 	case 72:
-		printf("↓");
+		//printf("↓");
 		player.position.y -= 1;
 		break;
 	case 75:
@@ -154,7 +179,6 @@ void keyProcess(int key2)
 	}
 }
 
-
 int main()
 {
 	screenInit();	// 스크린 초기화
@@ -163,7 +187,7 @@ int main()
 	int nKey;
 
 	while (TRUE) {
-		
+
 		nKey = getKeyEvent();
 		if (nKey == 27)		// ESC 입력
 			break;				// 반복 탈출 후, 게임 종료
