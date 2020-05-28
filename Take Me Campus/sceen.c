@@ -18,7 +18,7 @@ static HANDLE g_hScreen[2];     // 더블 버퍼용 배열 (크기 2 = 2개)
 void screenInit()
 {
     system("title Take Me Campus");
-    system("mode con cols=127 lines=45");
+    system("mode con cols=127 lines=32");       // cols(가로), line(세로)
     system("color F0");
 
     CONSOLE_CURSOR_INFO cci;
@@ -53,7 +53,7 @@ void screenClear()
     // dw값은 버퍼에 실제 기록된 문자수를 받는 변수 포인터
     DWORD dw;
     // 버퍼에, (공백)을 채운다, 80*25 만큼, (0, 0)(Coor)부터 시작하여
-    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 122 * 28, Coor, &dw);
+    FillConsoleOutputCharacter(g_hScreen[g_nScreenIndex], ' ', 123 * 33, Coor, &dw);
     
 }
 

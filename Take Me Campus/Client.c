@@ -6,6 +6,7 @@
 #include "fps.h"			// fps 출력 헤더
 #include "screen.h"			// 렌더링 처리 헤더
 #include "maps.h"
+#include "object.h"
 
 #pragma warning (disable:4996)
 
@@ -13,30 +14,17 @@
 
 FPSData* fpsData;	//
 
-char PLAYER_STR[] = "●";
+Object player;
+Object potal;
 
-typedef struct {
-	int x, y;		// 플레이어 좌표
-} Position;
+static stage = 1;
 
-typedef struct {
-	Position position;		// 플레이어 좌표
-	char* strPlayer;		// 플레이어 그래픽
-	int playerLen;			// 플레이어 길이
-} Player;
-
-Player player;		// 플레이어 선언
 
 void init()
 {
 	initFPSData(&fpsData);
-	player.position.x = 2;		// 플레이어 초기 좌표
-	player.position.y = 22;
-
-	player.playerLen = strlen(PLAYER_STR);
-
-	player.strPlayer = (char*)malloc(sizeof(char) * player.playerLen);
-	strcpy(player.strPlayer, PLAYER_STR);
+	player_init(&player);		// 플레이어 초기화
+	potal_init(&potal, stage);
 }
 
 void update()
@@ -49,37 +37,57 @@ void render()
 	screenClear();
 	drawFPS(&fpsData);
 
-
-
 	char string[100] = { 0, };
+	static stage = 1;
+
+	// 스테이지 클리어
+	if ((player.position.x == potal.position.x) &&
+		(player.position.y == potal.position.y)) {
+		stage++;
+		potal_init(&potal, stage);
+	}
+
+	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
+	
+	switch (stage)
+	{
+	case 1:
+		stage1();
+		break;
+	case 2:
+		stage2();
+		break;
+	default:
+		stage1();
+		break;
+	}
 
 	// 왼쪽으로 벗어나는 경우 - 클리핑 기술 활용
 	if (player.position.x < 2) {
-		screenPrint(0, player.position.y, &player.strPlayer[0]);
-		player.position.x += 2;
+		screenPrint(2, player.position.y, player.strPlayer);
+		player.position.x = 2;
 	}
 	// 오른쪽으로 벗어나는 경우
-	else if (123 < player.position.x + 1) {
-		screenPrint(122, player.position.y, &player.strPlayer[0]);
-		player.position.x -= 2;
+	else if (122 < player.position.x) {
+		screenPrint(122, player.position.y, player.strPlayer);
+		player.position.x = 122;
 	}
 	// 아래쪽으로 벗어나는 경우
-	else if (24 <= player.position.y) {
-		screenPrint(24, player.position.x, &player.strPlayer[0]);
-		player.position.y -= 1;
+	else if (29 < player.position.y) {
+		screenPrint(player.position.x, 29, player.strPlayer);
+		player.position.y = 29;
 	}
 	// 윗쪽으로 벗어나는 경우
-	else if (player.position.y <= 1) {
-		screenPrint(24, player.position.x, &player.strPlayer[0]);
-		player.position.y += 1;
+	else if (player.position.y < 2) {
+		screenPrint(player.position.x, 2, player.strPlayer);
+		player.position.y = 2;
 	}
+	// 일반 렌더링
 	else {
+		screenPrint(potal.position.x, potal.position.y, potal.strPlayer);
 		screenPrint(player.position.x, player.position.y, player.strPlayer);
 	}
-
-
-	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
-	stage1();
+	
 	screenPrint(10, 0, string);
 	screenFlipping();
 }
@@ -88,6 +96,11 @@ void render()
 void release()
 {
 	destoyFPSData(&fpsData);
+
+
+
+	// 캐릭터, 포탈, 
+	
 }
 
 void waitRender(clock_t oldTime)
@@ -152,12 +165,12 @@ int main()
 	int nKey;
 
 	while (TRUE) {
-
+		
 		nKey = getKeyEvent();
 		if (nKey == 27)		// ESC 입력
 			break;				// 반복 탈출 후, 게임 종료
 
-		keyProcess(nKey);		// 
+		keyProcess(nKey);		// 키 프로세스 진행
 
 		update();				// 데이터 업데이트
 

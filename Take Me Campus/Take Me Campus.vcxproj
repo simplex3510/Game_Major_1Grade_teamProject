@@ -142,12 +142,13 @@
     <ClCompile Include="fps.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="maps.c" />
+    <ClCompile Include="object.c" />
     <ClCompile Include="sceen.c" />
-    <ClCompile Include="title.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fps.h" />
     <ClInclude Include="maps.h" />
+    <ClInclude Include="object.h" />
     <ClInclude Include="screen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

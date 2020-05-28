@@ -30,7 +30,7 @@
     <ClCompile Include="fps.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="title.c">
+    <ClCompile Include="object.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +42,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="maps.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
