@@ -44,7 +44,7 @@ void render()
 	if ((player.position.x == potal.position.x) &&
 		(player.position.y == potal.position.y)) {
 		stage++;
-		potal_init(&potal, stage);
+		potal_position(&potal, stage);
 	}
 
 	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
@@ -96,8 +96,6 @@ void render()
 void release()
 {
 	destoyFPSData(&fpsData);
-
-
 
 	// 캐릭터, 포탈, 
 	

@@ -23,6 +23,20 @@ void player_init(Object* player)
 
 void potal_init(Object* potal, int stage)
 {
+	potal->position.x = 120;		// 플레이어 초기 좌표
+	potal->position.y = 23;
+
+	potal->playerLen = strlen(POTAL_STR);
+
+	potal->strPlayer = (char*)malloc(sizeof(char) * potal->playerLen);
+	strcpy(potal->strPlayer, POTAL_STR);
+
+	return;
+}
+
+// 포탈 위치 
+void potal_position(Object* potal, int stage)
+{
 	switch (stage)
 	{
 	case 1:
@@ -34,14 +48,10 @@ void potal_init(Object* potal, int stage)
 		potal->position.y = 5;
 		break;
 	default:
+		potal->position.x = 20;		// 플레이어 초기 좌표
+		potal->position.y = 20;
 		break;
 	}
-	
-
-	potal->playerLen = strlen(POTAL_STR);
-
-	potal->strPlayer = (char*)malloc(sizeof(char) * potal->playerLen);
-	strcpy(potal->strPlayer, POTAL_STR);
 
 	return;
 }

@@ -14,6 +14,9 @@ void player_init(Object* player);
 
 void potal_init(Object* potal, int stage);
 
+void potal_position(Object* potal, int stage);
+
+
 //void destroyObject(Object* object);
 
 //Player player;		// 플레이어 선언
