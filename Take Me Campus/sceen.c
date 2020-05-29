@@ -49,6 +49,7 @@ void screenFlipping()
 // 스크린 클리어
 void screenClear()
 {
+    // COORD는 좌표값을 저장할 수 있는 구조체
     COORD Coor = { 0,0 };
     // dw값은 버퍼에 실제 기록된 문자수를 받는 변수 포인터
     DWORD dw;

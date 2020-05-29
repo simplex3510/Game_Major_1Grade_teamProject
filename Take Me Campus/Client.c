@@ -1,7 +1,5 @@
 #include <stdio.h>			// 표준 입출력 헤더
 #include <conio.h>			// 입출력, 표준에서 벗어남
-#include <string.h>
-#include <windows.h>
 
 #include "fps.h"			// fps 출력 헤더
 #include "screen.h"			// 렌더링 처리 헤더
@@ -11,13 +9,21 @@
 #pragma warning (disable:4996)
 
 #define TRUE 1
+#define ESC 27
+
+#define ARROW 224
+#define UP 72
+#define DOWN 80
+#define LEFT 75
+#define RIGHT 77
+
 
 FPSData* fpsData;	// fpsData를 FPSData 포인터 형식으로 선언 
 
 Object player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
 
-static stage = 1;
+static int stage = 1;
 
 
 void init()
@@ -30,7 +36,7 @@ void init()
 void update()
 {
 	clock_t curTime = clock();
-	static count = 0;
+	static int count = 0;
 	player.bounce.isJump = 1;
 
 	// 즉, 최근 시간과 이전 시간을 빼면 시간차가 나오는데, 이게 일정 수준보다 커야함
@@ -67,7 +73,6 @@ void render()
 	drawFPS(&fpsData);
 
 	char string[100] = { 0, };
-	static stage = 1;
 
 	// 포탈 충돌 체크, 다음 스테이지
 	if ((player.position.x == potal.position.x) &&
@@ -93,28 +98,28 @@ void render()
 
 	// 왼쪽으로 벗어나는 경우 - 클리핑 기술 활용
 	if (player.position.x < 2) {
-		screenPrint(2, player.position.y, player.strPlayer);
+		screenPrint(2, player.position.y, player.strobject);
 		player.position.x = 2;
 	}
 	// 오른쪽으로 벗어나는 경우
 	else if (122 < player.position.x) {
-		screenPrint(122, player.position.y, player.strPlayer);
+		screenPrint(122, player.position.y, player.strobject);
 		player.position.x = 122;
 	}
 	// 아래쪽으로 벗어나는 경우
 	else if (29 < player.position.y) {
-		screenPrint(player.position.x, 29, player.strPlayer);
+		screenPrint(player.position.x, 29, player.strobject);
 		player.position.y = 29;
 	}
 	// 윗쪽으로 벗어나는 경우
 	else if (player.position.y < 2) {
-		screenPrint(player.position.x, 2, player.strPlayer);
+		screenPrint(player.position.x, 2, player.strobject);
 		player.position.y = 2;
 	}
 	// 일반 렌더링
 	else {
-		screenPrint(potal.position.x, potal.position.y, potal.strPlayer);		// 포탈 렌더링
-		screenPrint(player.position.x, player.position.y, player.strPlayer);	// 플레이어 렌더링
+		screenPrint(potal.position.x, potal.position.y, potal.strobject);		// 포탈 렌더링
+		screenPrint(player.position.x, player.position.y, player.strobject);	// 플레이어 렌더링
 	}
 
 	screenPrint(10, 0, string);
@@ -128,8 +133,8 @@ void release()
 	freeFPSData(&fpsData);
 
 	// 캐릭터, 포탈 동적할당 해제
-	//freeObject(&player);
-	//freeObject(&potal);
+	/*freeObject(&player);
+	freeObject(&potal);*/
 }
 
 // 프레임 조정
@@ -139,7 +144,7 @@ void waitRender(clock_t oldTime)
 	while (TRUE) {
 
 		curTime = clock();					// 렌더 후의 시간을 지속적으로 갱신
-		if (16 < curTime - oldTime)			// 두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출
+		if (10 < curTime - oldTime)			// 두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출, 10으로하니까 60프레임
 			break;
 	}
 }
@@ -147,20 +152,17 @@ void waitRender(clock_t oldTime)
 // 키 인식
 int getKeyEvent()
 {
-	clock_t curTime;
-	curTime = clock();
-
 	int key1, key2;
 
 	if (_kbhit()) {						// 키보드 입력 인식
 		key1 = _getch();				// 방향키 첫 번째 아스키 코드 값 저장
 
-		if (key1 == 27)					// esc키 입력
+		if (key1 == ESC)					// esc키 입력
 
 			return key1;				// 해당 키보드 값 반환
 
 		key2 = _getch();				// 방향키 두 번째 아스키 코드 값 저장
-		if (key1 == 224)				// 방향키가 입력되었을 때
+		if (key1 == ARROW)				// 방향키가 입력되었을 때
 			return key1, key2;			// 방향키 입력값 반환
 	}
 
@@ -172,19 +174,19 @@ void keyProcess(int key2)
 {
 
 	switch (key2) {					// 값에 따라 방향키 케이스 분할
-	case 80:
+	case UP:
 		//printf("↑");
-		player.position.y += 1;
-		break;
-	case 72:
-		//printf("↓");
 		player.position.y -= 1;
 		break;
-	case 75:
+	case DOWN:
+		//printf("↓");
+		player.position.y += 1;
+		break;
+	case LEFT:
 		//printf("←");
 		player.position.x -= 2;
 		break;
-	case 77:
+	case RIGHT:
 		//printf("→");
 		player.position.x += 2;
 		break;

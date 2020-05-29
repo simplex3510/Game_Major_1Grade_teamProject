@@ -2,6 +2,8 @@
 
 #pragma once
 
+#define OBJECT_SIZE 3
+
 typedef struct {
 	int x, y;		// 오브젝트 좌표
 } Position;
@@ -16,9 +18,8 @@ typedef struct {
 
 typedef struct {
 
-	Position position;		// 오브젝트 좌표
-	char* strPlayer;		// 오브젝트 문자열
-	int playerLen;			// 오브젝트 길이
+	Position position;					// 오브젝트 좌표
+	char strobject[OBJECT_SIZE];		// 오브젝트 문자열과 크기, 예상 가능한 크기임으로 3 고정
 	Bounce bounce;
 
 } Object;

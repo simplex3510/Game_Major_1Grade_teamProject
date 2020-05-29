@@ -15,12 +15,9 @@ void player_init(Object* player)
 	player->bounce.isTop = 0;
 
 	player->position.x = 2;		// 플레이어 초기 좌표
-	player->position.y = 23;
-
-	player->playerLen = strlen(PLAYER_STR);
-
-	player->strPlayer = (char*)malloc(sizeof(char) * player->playerLen);
-	strcpy(player->strPlayer, PLAYER_STR);
+	player->position.y = 39;
+	
+	strcpy(player->strobject, PLAYER_STR);
 
 	return;
 }
@@ -30,10 +27,7 @@ void potal_init(Object* potal, int stage)
 	potal->position.x = 120;		// 플레이어 초기 좌표
 	potal->position.y = 23;
 
-	potal->playerLen = strlen(POTAL_STR);
-
-	potal->strPlayer = (char*)malloc(sizeof(char) * potal->playerLen);
-	strcpy(potal->strPlayer, POTAL_STR);
+	strcpy(potal->strobject, POTAL_STR);
 
 	return;
 }
@@ -62,7 +56,7 @@ void potal_position(Object* potal, int stage)
 
 //void freeObject(Object* object)
 //{
-//	free(object->strPlayer);
+//	free(object->strobject);
 //
 //	return;
 //}
