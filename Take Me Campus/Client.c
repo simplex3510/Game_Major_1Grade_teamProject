@@ -83,6 +83,7 @@ void render()
 
 	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
 
+	// 스테이지 출력
 	switch (stage)
 	{
 	case 1:
@@ -132,9 +133,6 @@ void release()
 	// FPS 관련 동적할당 2개 해제
 	freeFPSData(&fpsData);
 
-	// 캐릭터, 포탈 동적할당 해제
-	/*freeObject(&player);
-	freeObject(&potal);*/
 }
 
 // 프레임 조정

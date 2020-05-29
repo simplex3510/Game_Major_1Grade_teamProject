@@ -25,7 +25,7 @@ void player_init(Object* player)
 void potal_init(Object* potal, int stage)
 {
 	potal->position.x = 120;		// 플레이어 초기 좌표
-	potal->position.y = 23;
+	potal->position.y = 28;
 
 	strcpy(potal->strobject, POTAL_STR);
 
@@ -39,7 +39,7 @@ void potal_position(Object* potal, int stage)
 	{
 	case 1:
 		potal->position.x = 120;		// 플레이어 초기 좌표
-		potal->position.y = 23;
+		potal->position.y = 28;
 		break;
 	case 2:
 		potal->position.x = 120;		// 플레이어 초기 좌표

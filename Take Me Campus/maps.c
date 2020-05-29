@@ -2,6 +2,12 @@
 #include "screen.h"
 #include "maps.h"
 
+#pragma warning (disable:4996)
+
+#define MAP_WIDTH 123
+#define MAP_HEIGHT 33
+
+
 // space_bar: 32
 // up:		224, 72
 // down:	224, 80
@@ -32,7 +38,7 @@ void stage1()
 	screenPrint(0, 20, "бс");								  screenPrint(124, 20, "бс");
 	screenPrint(0, 21, "бс");								  screenPrint(124, 21, "бс");
 	screenPrint(0, 22, "бс");								  screenPrint(124, 22, "бс");
-	screenPrint(0, 23, "бс");								  screenPrint(124, 23, "бс" );
+	screenPrint(0, 23, "бс");								  screenPrint(124, 23, "бс");
 	screenPrint(0, 24, "бс");								  screenPrint(124, 24, "бс");
 	screenPrint(0, 25, "бс");								  screenPrint(124, 25, "бс");
 	screenPrint(0, 26, "бс");								  screenPrint(124, 26, "бс");
@@ -67,11 +73,14 @@ void stage2()
 	screenPrint(0, 21, "бс");								  screenPrint(124, 21, "бс");
 	screenPrint(0, 22, "бс");								  screenPrint(124, 22, "бс");
 	screenPrint(0, 23, "бс");								  screenPrint(124, 23, "бс");
-	screenPrint(0, 24, "бс");   screenPrint(10, 24, "бсбсбсбс");	  screenPrint(124, 24, "бс");
+	screenPrint(0, 24, "бс");								  screenPrint(124, 24, "бс");
 	screenPrint(0, 25, "бс");								  screenPrint(124, 25, "бс");
 	screenPrint(0, 26, "бс");								  screenPrint(124, 26, "бс");
 	screenPrint(0, 27, "бс");								  screenPrint(124, 27, "бс");
 	screenPrint(0, 28, "бс");								  screenPrint(124, 28, "бс");
-	screenPrint(0, 29, "бс");								  screenPrint(124, 29, "бс");
+	screenPrint(0, 30, "бсбубубубубубубубубубубубубубубубубубубубубубубубубубубубубубубубубубубс");
 	screenPrint(0, 30, "бсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбсбс");
+
+
+
 }
