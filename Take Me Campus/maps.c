@@ -101,17 +101,3 @@ void stage2()
 	screenPrint(0, 29, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");								  screenPrint(124, 29, "¡á");
 	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
 }
-
-void stage2Colide(Player* player, Object* platfrom)
-{
-	if ((player->position.x == platfrom->position.x) &&
-		(player->position.y > platfrom->position.y)) {
-		player->position.x += 2;
-	}
-
-	if ((player->position.x <= platfrom->position.x) &&
-		(player->position.y > platfrom->position.y - 1)) {
-		player->position.y--;
-
-	}
-}

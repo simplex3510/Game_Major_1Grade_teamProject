@@ -44,3 +44,7 @@ void potal_init(Object* potal, int stage);
 
 void platform_init(Object* platfrom, int plus);
 
+void potal_position(Object* potal, int stage);
+
+void stage2Colide(Player* player, Object* platfrom);
+
