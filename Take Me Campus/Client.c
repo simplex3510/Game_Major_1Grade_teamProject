@@ -20,8 +20,9 @@
 
 FPSData* fpsData;	// fpsData를 FPSData 포인터 형식으로 선언 
 
-Object player;		// 플레이어 오브젝트 선언
+Player player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
+Object platform[5];
 
 static int stage = 1;
 
@@ -31,6 +32,10 @@ void init()
 	initFPSData(&fpsData);		// FPS 초기화
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
+	for (int i = 0; i < 3; i++)
+	{
+		platform_init(&platform[i], i);
+	}
 }
 
 void update()
@@ -91,6 +96,10 @@ void render()
 		break;
 	case 2:
 		stage2();
+		for (int i = 0; i < 3; i++) {
+			screenPrint(platform[i].position.x, platform[i].position.y, platform[i].strobject);
+			stage2Colide(&player, &platform[i]);
+		}
 		break;
 	default:
 		stage1();

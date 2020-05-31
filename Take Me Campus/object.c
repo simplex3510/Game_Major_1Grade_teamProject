@@ -7,8 +7,9 @@
 
 char PLAYER_STR[] = "¡Ü";
 char POTAL_STR[] = "¡Ú";
+char PLATFORM_STR[] = "¡á";
 
-void player_init(Object* player)
+void player_init(Player* player)
 {
 	player->bounce.isJump = 1;
 	player->bounce.jumpTime = 70;
@@ -28,6 +29,17 @@ void potal_init(Object* potal, int stage)
 	potal->position.y = 28;
 
 	strcpy(potal->strobject, POTAL_STR);
+
+	return;
+}
+
+void platform_init(Object* platfrom, int plus)
+{
+	platfrom->isColide = TRUE;
+	platfrom->position.x = 112;
+	platfrom->position.y = 29 - plus;
+
+	strcpy(platfrom->strobject, PLATFORM_STR);
 
 	return;
 }
@@ -53,10 +65,3 @@ void potal_position(Object* potal, int stage)
 
 	return;
 }
-
-//void freeObject(Object* object)
-//{
-//	free(object->strobject);
-//
-//	return;
-//}
