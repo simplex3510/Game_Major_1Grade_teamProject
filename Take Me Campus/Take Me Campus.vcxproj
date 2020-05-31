@@ -144,12 +144,14 @@
     <ClCompile Include="maps.c" />
     <ClCompile Include="object.c" />
     <ClCompile Include="sceen.c" />
+    <ClCompile Include="SoundManager.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fps.h" />
     <ClInclude Include="maps.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="screen.h" />
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
