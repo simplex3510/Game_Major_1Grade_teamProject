@@ -139,6 +139,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client.c" />
+    <ClCompile Include="colide.c" />
     <ClCompile Include="fps.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="maps.c" />
@@ -147,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fps.h" />
-    <ClInclude Include="maps.h" />
+    <ClInclude Include="colide.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="screen.h" />
   </ItemGroup>
