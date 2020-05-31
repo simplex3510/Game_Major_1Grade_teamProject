@@ -53,7 +53,7 @@ void update()
 		if (player.bounce.isTop == 0) {
 			player.position.y--;
 			count++;
-			// 최고점에 달았을 경우, 
+			// 최고점에 다랐을 경우, 
 			if (count == 3) { player.bounce.isTop = 1; }
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 
