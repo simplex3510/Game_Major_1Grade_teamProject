@@ -32,6 +32,7 @@ void sound_init()
 
 	//배경음 파일 추가하는 곳 ↓ bgmSoundFileAdd("추가할 파일이름", 몇번째 배경음인지 숫자);
 	bgmSoundFileAdd("01.mp3", 0); //배경음 추가 예시
+	bgmSoundFileAdd("03.mp3", 1);
 
 	//효과음 파일 추가하는 곳 ↓ effectSoundFileAdd("추가할 파일이름", 몇번째 효과음인지 숫자);
 	effectSoundFileAdd("펀치 표준 게임.wav", 0); //효과음 추가 예시
@@ -58,7 +59,7 @@ void sound_release()
 void playBgmSound(int number)
 {
 	if (!bgmSoundChannel)	FMOD_Channel_IsPlaying(bgmSoundChannel, bgmSoundOnOff);
-	if (!bgmSoundOnOff)	FMOD_Channel_Stop(bgmSoundChannel);
+	if (!bgmSoundOnOff)		FMOD_Channel_Stop(bgmSoundChannel);
 	FMOD_System_PlaySound(soundSystem, bgmSoundFile[number], 0, 0, &bgmSoundChannel);
 }
 
@@ -72,4 +73,10 @@ void playEffectSound(int number)
 void sound_update()
 {
 	FMOD_System_Update(soundSystem);
+}
+
+void sound_volume(double volume)
+{
+	FMOD_Channel_SetVolume(bgmSoundChannel,volume);
+	FMOD_Channel_SetVolume(effectSoundChannel, volume);
 }
