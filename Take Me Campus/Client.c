@@ -5,6 +5,7 @@
 #include "screen.h"			// 렌더링 처리 헤더
 #include "maps.h"
 #include "object.h"
+#include "SoundManager.h"
 
 #pragma warning (disable:4996)
 
@@ -36,6 +37,9 @@ void init()
 	{
 		platform_init(&platform[i], i);
 	}
+	sound_init();				// FMOD 초기화
+	playBgmSound(1);			// 1번째 브금 실행
+	sound_volume(0.1f);
 }
 
 void update()
@@ -204,6 +208,7 @@ int main()
 {
 	screenInit();	// 스크린 초기화
 	init();			// 게임 초기화
+	
 
 	int nKey;
 
@@ -218,12 +223,15 @@ int main()
 
 		update();				// 데이터 업데이트
 
+		sound_update();			//FMOD 업데이트
+
 		render();				// 그래픽 렌더링
 		waitRender(clock());
 	}
 
 	release();					// 동적할당 헤제
 	screenRelease();			// 스크린 동적 할당 해제
+	sound_release();			// FMOD 종료
 
 	printf("Thank you for your playing!");
 

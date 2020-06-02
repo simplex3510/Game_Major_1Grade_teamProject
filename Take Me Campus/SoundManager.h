@@ -20,3 +20,6 @@ void playEffectSound(int number);
 
 //사운드 갱신 - 지속적으로 호출 필요
 void sound_update();
+
+//볼륨 조절 함수
+void sound_volume(double volume);
