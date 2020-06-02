@@ -3,6 +3,7 @@
 
 #include "fps.h"			// fps 출력 헤더
 #include "screen.h"			// 렌더링 처리 헤더
+#include "colide.h"			// 스테이지 별 충돌 체크
 #include "maps.h"
 #include "object.h"
 
