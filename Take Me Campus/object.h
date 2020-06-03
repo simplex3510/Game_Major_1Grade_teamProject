@@ -9,7 +9,7 @@
 #define FALSE 0
 
 typedef struct {
-	int x, y;		// 오브젝트 좌표
+	float x, y;		// 오브젝트 좌표
 } Position;
 
 typedef struct {

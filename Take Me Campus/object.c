@@ -12,7 +12,7 @@ char PLATFORM_STR[] = "■";
 void player_init(Player* player)
 {
 	player->bounce.isJump = 1;
-	player->bounce.jumpTime = 70;
+	player->bounce.jumpTime = 70 / 1000.0f;
 	player->bounce.isTop = 0;
 
 	player->position.x = 2;		// 플레이어 초기 좌표

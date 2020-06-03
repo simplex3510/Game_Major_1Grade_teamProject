@@ -8,6 +8,7 @@
 #include "maps.h"
 #include "object.h"
 #include "SoundManager.h"
+#include "Timer.h"
 
 
 #define TRUE 1
@@ -20,6 +21,9 @@
 #define RIGHT 77
 
 
+clock_t curTime;
+clock_t oldTime;
+
 Player player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
 Object platform[5];
@@ -29,12 +33,18 @@ static int stage = 1;
 
 void init()
 {
+	curTime = clock() / 1000.0f;
+	oldTime = clock() / 1000.0f;
+
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
 	for (int i = 0; i < 3; i++)
 	{
 		platform_init(&platform[i], i);
 	}
+
+	//initTimer();				// 타이머 초기화
+
 	sound_init();				// FMOD 초기화
 	playBgmSound(1);			// 1번째 브금 실행
 	sound_volume(0.1f);
@@ -42,32 +52,65 @@ void init()
 
 void update()
 {
-	clock_t curTime = clock();
+	curTime = clock() / 1000.0f;
 	static int count = 0;
 	player.bounce.isJump = 1;
+
+	int speed = 10;
+	float dist = 1;
 
 	// 즉, 최근 시간과 이전 시간을 빼면 시간차가 나오는데, 이게 일정 수준보다 커야함
 	// -> 점프와 점프 사이의 시간적 간격 = 점프 속도
 	// 점프와 점프사이의 시간차 < (최근시간 - 이전 시간)
-	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+
+	//updateTimer();
+
+	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+	//
+	//	// 최고점이 아니라면, 상승한다.
+	//	if (player.bounce.isTop == 0) {
+	//		player.position.y--;
+	//		count++;
+	//		// 최고점에 다랐을 경우, 
+	//		if (count == 3) { player.bounce.isTop = 1; }
+	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+	//
+	//		return;
+	//	}
+	//	// 최고점이라면, 하강한다.
+	//	else if (player.bounce.isTop == 1) {
+	//		player.position.y++;
+	//		count++;
+	//		// 다시 내려왔을 경우
+	//		if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
+	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+	//		return;
+	//	}
+	//}
+
+	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
+	while (player.bounce.jumpTime < (curTime - oldTime)*1) {
+
+		dist = speed * ((curTime - oldTime) * 1);
 
 		// 최고점이 아니라면, 상승한다.
 		if (player.bounce.isTop == 0) {
-			player.position.y--;
+			player.position.y -= dist;
 			count++;
 			// 최고점에 다랐을 경우, 
 			if (count == 3) { player.bounce.isTop = 1; }
-			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+			oldTime = curTime;    // 점프 시점 시각 업데이트
 
 			return;
 		}
 		// 최고점이라면, 하강한다.
 		else if (player.bounce.isTop == 1) {
-			player.position.y++;
+			player.position.y += dist;
 			count++;
 			// 다시 내려왔을 경우
 			if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
-			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+			oldTime = curTime;    // 점프 시점 시각 업데이트
+
 			return;
 		}
 	}
@@ -87,7 +130,7 @@ void render()
 		potal_position(&potal, stage);
 	}
 
-	sprintf(string, "캐릭터 이동 좌표: (%d, %d)", player.position.x, player.position.y);
+	sprintf(string, "캐릭터 이동 좌표: (%f, %f)", player.position.x, player.position.y);
 
 	// 스테이지 출력
 	switch (stage)
