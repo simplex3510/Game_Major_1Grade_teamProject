@@ -75,8 +75,14 @@ void sound_update()
 	FMOD_System_Update(soundSystem);
 }
 
-void sound_volume(double volume)
+//배경음 볼륨 조절 함수
+void sound_bgmVolume(double volume)
 {
 	FMOD_Channel_SetVolume(bgmSoundChannel,volume);
+}
+
+//효과음 볼륨 조절 함수
+void sound_effectVolume(double volume)
+{
 	FMOD_Channel_SetVolume(effectSoundChannel, volume);
 }
