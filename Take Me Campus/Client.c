@@ -1,14 +1,14 @@
+#pragma warning (disable:4996)
+
 #include <stdio.h>			// 표준 입출력 헤더
 #include <conio.h>			// 입출력, 표준에서 벗어남
 
-//#include "fps.h"			// fps 출력 헤더
 #include "screen.h"			// 렌더링 처리 헤더
 #include "colide.h"			// 스테이지 별 충돌 체크
 #include "maps.h"
 #include "object.h"
 #include "SoundManager.h"
 
-#pragma warning (disable:4996)
 
 #define TRUE 1
 #define ESC 27
@@ -20,8 +20,6 @@
 #define RIGHT 77
 
 
-//FPSData* fpsData;	// fpsData를 FPSData 포인터 형식으로 선언 
-
 Player player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
 Object platform[5];
@@ -31,7 +29,6 @@ static int stage = 1;
 
 void init()
 {
-	//initFPSData(&fpsData);		// FPS 초기화
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
 	for (int i = 0; i < 3; i++)
@@ -80,7 +77,6 @@ void update()
 void render()
 {
 	screenClear();
-	//drawFPS(&fpsData);
 
 	char string[100] = { 0, };
 
@@ -144,8 +140,6 @@ void render()
 // 동적 할당 해제
 void release()
 {
-	// FPS 관련 동적할당 2개 해제
-	//freeFPSData(&fpsData);
 
 }
 

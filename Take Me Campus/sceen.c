@@ -1,7 +1,8 @@
-#include <windows.h>
-
 #pragma once
 #pragma warning (disable:4996)
+
+#include <windows.h>
+
 
 /*
 static의 사용 경우
@@ -14,37 +15,42 @@ static의 사용 경우
     => ∴ 아래의 두 변수는 항상 유지되며, screen.c 에서만 접근한다.
 */
 
+
 static int g_nScreenIndex;      // 출력 버퍼 인덱스 변수
 static HANDLE g_hScreen[2];     // 더블 버퍼용 배열 (크기 2 = 2개)
 
 // 스크린 초기화(초기 설정)
 void screenInit()
 {
-    system("title Take Me Campus");
+    system("title Take Me Campus");             // 콘솔창 이름 설정
     system("mode con cols=127 lines=32");       // cols(가로), line(세로)
-    system("color F0");
+    system("color F0");                         // 콘솔 출력 색상 설정 (배경 - 흰 / 문자 - 검)
 
-    CONSOLE_CURSOR_INFO cci;
+    CONSOLE_CURSOR_INFO cci;                    // 콘솔의 커서에 대한 정보를 담을 변수 선언
 
     // 화면 버퍼 생성 및 설정
-    // 매개 변수 = (콘솔 화면 버퍼에 대한 액세스, 버퍼 공유 여부, 상속의 여부, )
+    // 매개 변수 = (콘솔 화면 버퍼에 대한 액세스, 버퍼 공유 여부, 상속의 여부, 생성할 콘솔 화면 버퍼 유형, Reserved; should be NULL.)
     g_hScreen[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE,
         0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
     g_hScreen[1] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE,
         0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 
-    //커서 숨기기
+    //커서 정보 설정 - 숨기기
     cci.dwSize = 1;                                     // 커서로 채워지는 문자 셀의 비율(1~100) - 1만큼
     cci.bVisible = FALSE;                               // 화면 표시 여부 - 안 함
-    SetConsoleCursorInfo(g_hScreen[0], &cci);           // 생성한 스크린 버퍼에 정의한 커서의 정보를 설정.
-    SetConsoleCursorInfo(g_hScreen[1], &cci);           // 버퍼 둘다 cci 설정을 전달 받음 - 커서 출력 안 함
+
+    // 생성한 스크린 버퍼에 정의한 커서의 정보를 설정.
+    // 버퍼 둘다 cci 설정을 전달 받음 - 커서 출력 안 함
+    SetConsoleCursorInfo(g_hScreen[0], &cci);           
+    SetConsoleCursorInfo(g_hScreen[1], &cci);           
 }
 
-// 버퍼 스왑
+// 버퍼 스왑(전환)
 void screenFlipping()
 {
     // 전달받은 버퍼를 화면에 출력
     SetConsoleActiveScreenBuffer(g_hScreen[g_nScreenIndex]);
+
     // 다른 버퍼 출력을 위해 인덱스 값 변환
     g_nScreenIndex = !g_nScreenIndex;
 }
@@ -64,7 +70,7 @@ void screenClear()
 // 화면 해제
 void screenRelease()
 {
-    // 버퍼 2개 다 해제
+    // 버퍼 2개 다 해제 - free
     CloseHandle(g_hScreen[0]);
     CloseHandle(g_hScreen[1]);
 }
@@ -74,9 +80,14 @@ void screenPrint(int x, int y, char* string)
 {
     // dw값은 버퍼에 실제 기록된 문자수를 받는 변수 포인터
     DWORD dw;
+    // 커서의 위치
     COORD CursorPosition = { x, y };
-    // 커서를 출력할 버퍼와 좌표 설정
+
+    // 커서 위치에서 문자열 출력하기 위해 커서 위치 설정
+    // 커서를 출력할 버퍼, 좌표 전달
     SetConsoleCursorPosition(g_hScreen[g_nScreenIndex], CursorPosition);
+
+    // 문자열을 화면에 출력
     // 버퍼 지정, 출력할 스트링, 스트링 길이, dw포인터, 비동기 입출력 미사용
     WriteFile(g_hScreen[g_nScreenIndex], string, strlen(string), &dw, NULL);
 }
