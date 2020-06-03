@@ -46,8 +46,6 @@ void init()
 	//initTimer();				// 타이머 초기화
 
 	sound_init();				// FMOD 초기화
-	playBgmSound(1);			// 1번째 브금 실행
-	sound_volume(0.1f);
 }
 
 void update()
@@ -246,7 +244,8 @@ int main()
 {
 	screenInit();	// 스크린 초기화
 	init();			// 게임 초기화
-	
+	playBgmSound(1);			// 1번째 브금 실행
+	sound_bgmVolume(0.1f);		// 배경음 볼륨 0,1로 조절
 
 	int nKey;
 
