@@ -33,9 +33,6 @@ static int stage = 1;
 
 void init()
 {
-	curTime = clock() / 1000.0f;
-	oldTime = clock() / 1000.0f;
-
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
 	for (int i = 0; i < 3; i++)
@@ -117,6 +114,7 @@ void update()
 // 화면에 출력
 void render()
 {
+	// 화면을 다시 그리기 위해 비우기
 	screenClear();
 
 	char string[100] = { 0, };
@@ -127,8 +125,6 @@ void render()
 		stage++;
 		potal_position(&potal, stage);
 	}
-
-	sprintf(string, "캐릭터 이동 좌표: (%f, %f)", player.position.x, player.position.y);
 
 	// 스테이지 출력
 	switch (stage)
@@ -174,7 +170,10 @@ void render()
 		screenPrint(player.position.x, player.position.y, player.strobject);	// 플레이어 렌더링
 	}
 
+	sprintf(string, "캐릭터 이동 좌표: (%f, %f)", player.position.x, player.position.y);
 	screenPrint(10, 0, string);
+
+	// 스크린 버퍼 전환
 	screenFlipping();
 }
 
@@ -205,22 +204,24 @@ int getKeyEvent()
 		key1 = _getch();				// 방향키 첫 번째 아스키 코드 값 저장
 
 		if (key1 == ESC)					// esc키 입력
-
 			return key1;				// 해당 키보드 값 반환
 
+
+
+		// --------------방향키 존---------------
 		key2 = _getch();				// 방향키 두 번째 아스키 코드 값 저장
 		if (key1 == ARROW)				// 방향키가 입력되었을 때
-			return key1, key2;			// 방향키 입력값 반환
+			return key2;				// 방향키 입력값 반환
 	}
 
 	return -1;						// 방향키 입력이 아니면 -1 반환
 }
 
 // 인식된 키에 대응하는 명령 실행
-void keyProcess(int key2)
+void keyProcess(int key)
 {
 
-	switch (key2) {					// 값에 따라 방향키 케이스 분할
+	switch (key) {					// 값에 따라 방향키 케이스 분할
 	case UP:
 		//printf("↑");
 		player.position.y -= 1;
@@ -253,21 +254,21 @@ int main()
 	while (TRUE) {
 
 		nKey = getKeyEvent();
-		if (nKey == 27)		// ESC 입력
+		if (nKey == ESC)		// ESC 입력
 			break;				// 반복 탈출 후, 게임 종료
 
 		keyProcess(nKey);		// 키 프로세스 진행
 
 		update();				// 데이터 업데이트
 
-		sound_update();			//FMOD 업데이트
+		sound_update();			// FMOD 업데이트
 
 		render();				// 그래픽 렌더링
 		waitRender(clock());
 	}
 
 	release();					// 동적할당 헤제
-	screenRelease();			// 스크린 동적 할당 해제
+	screenRelease();			// 스크린 해제
 	sound_release();			// FMOD 종료
 
 	printf("Thank you for your playing!");

@@ -50,15 +50,15 @@ void potal_position(Object* potal, int stage)
 	switch (stage)
 	{
 	case 1:
-		potal->position.x = 120;		// 플레이어 초기 좌표
+		potal->position.x = 120;
 		potal->position.y = 28;
 		break;
 	case 2:
-		potal->position.x = 120;		// 플레이어 초기 좌표
+		potal->position.x = 120;
 		potal->position.y = 5;
 		break;
 	default:
-		potal->position.x = 20;		// 플레이어 초기 좌표
+		potal->position.x = 20;	
 		potal->position.y = 20;
 		break;
 	}
