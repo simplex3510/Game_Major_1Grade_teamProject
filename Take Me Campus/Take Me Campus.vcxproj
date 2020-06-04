@@ -74,8 +74,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Simplex\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Simplex\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\chic3\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\chic3\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -106,7 +106,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;C:\Users\Simplex\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\chic3\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;C:\Users\Simplex\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>fmod64_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
