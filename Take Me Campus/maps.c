@@ -102,3 +102,37 @@ void stage2()
 	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
 }
 
+void stage3()
+{
+	screenPrint(0, 1, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
+	screenPrint(0, 2, "¡á");                          screenPrint(124, 2, "¡á");
+	screenPrint(0, 3, "¡á");                                 screenPrint(124, 3, "¡á");
+	screenPrint(0, 4, "¡á");                          screenPrint(124, 4, "¡á");
+	screenPrint(0, 5, "¡á");                          screenPrint(124, 5, "¡á");
+	screenPrint(0, 6, "¡á");   screenPrint(110, 6, "¡á¡á¡á¡á¡á¡á¡á");           screenPrint(124, 6, "¡á");
+	screenPrint(0, 7, "¡á");                          screenPrint(124, 7, "¡á");
+	screenPrint(0, 8, "¡á");                          screenPrint(124, 8, "¡á");
+	screenPrint(0, 9, "¡á");   screenPrint(90, 9, "¡á¡á¡á¡á¡á¡á¡á¡á");              screenPrint(124, 9, "¡á");
+	screenPrint(0, 10, "¡á");                          screenPrint(124, 10, "¡á");
+	screenPrint(0, 11, "¡á");                          screenPrint(124, 11, "¡á");
+	screenPrint(0, 12, "¡á");   screenPrint(70, 12, "¡á¡á¡á¡á¡á¡á¡á¡á");              screenPrint(124, 12, "¡á");
+	screenPrint(0, 13, "¡á");                          screenPrint(124, 13, "¡á");
+	screenPrint(0, 14, "¡á");                          screenPrint(124, 14, "¡á");
+	screenPrint(0, 15, "¡á");   screenPrint(50, 15, "¡á¡á¡á¡á¡á¡á¡á¡á");                 screenPrint(124, 15, "¡á");
+	screenPrint(0, 16, "¡á");                          screenPrint(124, 16, "¡á");
+	screenPrint(0, 17, "¡á");                          screenPrint(124, 17, "¡á");
+	screenPrint(0, 18, "¡á");   screenPrint(30, 18, "¡á¡á¡á¡á¡á¡á¡á¡á");                    screenPrint(124, 18, "¡á");
+	screenPrint(0, 19, "¡á");                          screenPrint(124, 19, "¡á");
+	screenPrint(0, 20, "¡á");                          screenPrint(124, 20, "¡á");
+	screenPrint(0, 21, "¡á");   screenPrint(10, 21, "¡á¡á¡á¡á¡á¡á¡á¡á");                       screenPrint(124, 21, "¡á");
+	screenPrint(0, 22, "¡á");                          screenPrint(124, 22, "¡á");
+	screenPrint(0, 23, "¡á");                          screenPrint(124, 23, "¡á");
+	screenPrint(0, 24, "¡á");   screenPrint(25, 24, "¡á¡á¡á¡á");                       screenPrint(124, 24, "¡á");
+	screenPrint(0, 25, "¡á");                          screenPrint(124, 25, "¡á");
+	screenPrint(0, 26, "¡á");                          screenPrint(124, 26, "¡á");
+	screenPrint(0, 27, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");                          screenPrint(124, 27, "¡á");
+	screenPrint(0, 28, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");                          screenPrint(124, 28, "¡á");
+	screenPrint(0, 29, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");                          screenPrint(124, 29, "¡á");
+	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
+}
+
