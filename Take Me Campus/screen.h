@@ -1,6 +1,8 @@
 #pragma once
 #pragma warning (disable:4996)
 
+#include <windows.h>
+
 // 화번 버퍼 초기화, 전위와 후위 버퍼 2개 생성
 void screenInit();
 

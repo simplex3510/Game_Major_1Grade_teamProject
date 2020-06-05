@@ -20,6 +20,7 @@
 #define LEFT 75
 #define RIGHT 77
 
+int LOOP = TRUE;
 
 clock_t curTime;
 clock_t oldTime;
@@ -139,8 +140,12 @@ void render()
 			stage2Colide(&player, &platform[i]);
 		}*/
 		break;
-	case 3:
+	/*case 3:
 		stage3();
+		break;*/
+	case 4:
+		stageEnding();
+		LOOP = FALSE;
 		break;
 	default:
 		stage1();
@@ -174,7 +179,7 @@ void render()
 	}
 
 	sprintf(string, "캐릭터 이동 좌표: (%f, %f)", player.position.x, player.position.y);
-	screenPrint(10, 0, string);
+	screenPrint(0, 0, string);
 
 	// 스크린 버퍼 전환
 	screenFlipping();
@@ -254,11 +259,13 @@ int main()
 	int nKey;
 
 	// 메인 루프
-	while (TRUE) {
+	while (LOOP) {
 
 		nKey = getKeyEvent();
-		if (nKey == ESC)		// ESC 입력
+		if (nKey == ESC) {		// ESC 입력
+
 			break;				// 반복 탈출 후, 게임 종료
+		}
 
 		keyProcess(nKey);		// 키 프로세스 진행
 
@@ -278,3 +285,4 @@ int main()
 
 	return 0;
 }
+
