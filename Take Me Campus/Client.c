@@ -27,15 +27,16 @@ clock_t oldTime;
 
 Player player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
+Object home;
 //Object platform[5];
 
 static int stage = 1;
-
 
 void init()
 {
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
+	home_init(&home);
 	/*for (int i = 0; i < 3; i++)
 	{
 		platform_init(&platform[i], i);
@@ -48,7 +49,7 @@ void init()
 
 void update()
 {
-	curTime = clock() / 1000.0f;
+	curTime = clock(); // 1000.0f;
 	static int count = 0;
 	//player.bounce.isJump = 1;
 
@@ -61,55 +62,55 @@ void update()
 
 	//updateTimer();
 
-	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+	
+		// 최고점이 아니라면, 상승한다.
+		if (player.bounce.isTop == 0) {
+			player.position.y--;
+			count++;
+			// 최고점에 다랐을 경우, 
+			if (count == 3) { player.bounce.isTop = 1; }
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+	
+			return;
+		}
+		// 최고점이라면, 하강한다.
+		else if (player.bounce.isTop == 1) {
+			player.position.y++;
+			count++;
+			// 다시 내려왔을 경우
+			if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+			return;
+		}
+	}
+
+	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
+	//while (player.bounce.jumpTime < (curTime - oldTime)*1) {
+	//
+	//	dist = speed * ((curTime - oldTime) * 1);
 	//
 	//	// 최고점이 아니라면, 상승한다.
 	//	if (player.bounce.isTop == 0) {
-	//		player.position.y--;
+	//		player.position.y -= dist;
 	//		count++;
 	//		// 최고점에 다랐을 경우, 
 	//		if (count == 3) { player.bounce.isTop = 1; }
-	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+	//		oldTime = curTime;    // 점프 시점 시각 업데이트
 	//
 	//		return;
 	//	}
 	//	// 최고점이라면, 하강한다.
 	//	else if (player.bounce.isTop == 1) {
-	//		player.position.y++;
+	//		player.position.y += dist;
 	//		count++;
 	//		// 다시 내려왔을 경우
-	//		if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
-	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+	//		if (count == 6) { player.bounce.isTop = 0; count = 0; }
+	//		oldTime = curTime;    // 점프 시점 시각 업데이트
+	//
 	//		return;
 	//	}
 	//}
-
-	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
-	while (player.bounce.jumpTime < (curTime - oldTime)*1) {
-
-		dist = speed * ((curTime - oldTime) * 1);
-
-		// 최고점이 아니라면, 상승한다.
-		if (player.bounce.isTop == 0) {
-			player.position.y -= dist;
-			count++;
-			// 최고점에 다랐을 경우, 
-			if (count == 3) { player.bounce.isTop = 1; }
-			oldTime = curTime;    // 점프 시점 시각 업데이트
-
-			return;
-		}
-		// 최고점이라면, 하강한다.
-		else if (player.bounce.isTop == 1) {
-			player.position.y += dist;
-			count++;
-			// 다시 내려왔을 경우
-			if (count == 6) { player.bounce.isTop = 0; count = 0; }
-			oldTime = curTime;    // 점프 시점 시각 업데이트
-
-			return;
-		}
-	}
 }
 
 // 화면에 출력
@@ -119,12 +120,19 @@ void render()
 	screenClear();
 
 	char string[100] = { 0, };
+	char str_stage[100] = { 0, };
 
 	// 포탈 충돌 체크, 다음 스테이지
 	if ((player.position.x == potal.position.x) &&
 		(player.position.y == potal.position.y)) {
 		stage++;
-		potal_position(&potal, stage);
+		object_position(&player, &potal, &home, stage);
+
+	}
+	else if ((player.position.x == home.position.x) &&
+			 (player.position.y == home.position.y)) {
+		stage++;
+		object_position(&player, &potal, &home, stage);
 	}
 
 	// 스테이지 출력
@@ -142,14 +150,14 @@ void render()
 		break;
 	case 3:
 		stage3();
+		
 		break;
 	case 4:
 		stageEnding();
-		screenPrint(25, 25, "Good Choice!");
-		//LOOP = FALSE;
 		break;
 	default:
 		stage1();
+		LOOP = FALSE;
 		break;
 	}
 
@@ -175,10 +183,14 @@ void render()
 	}
 	// 일반 렌더링
 	else {
+		screenPrint(home.position.x, home.position.y, home.strobject);			// 홈 렌더링
 		screenPrint(potal.position.x, potal.position.y, potal.strobject);		// 포탈 렌더링
 		screenPrint(player.position.x, player.position.y, player.strobject);	// 플레이어 렌더링
 	}
 
+
+	sprintf(string, "스테이지: %d", stage);
+	screenPrint(50, 0, string);
 	sprintf(string, "캐릭터 이동 좌표: (%f, %f)", player.position.x, player.position.y);
 	screenPrint(0, 0, string);
 

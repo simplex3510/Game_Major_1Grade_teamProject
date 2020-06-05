@@ -7,12 +7,13 @@
 
 char PLAYER_STR[] = "¡Ü";
 char POTAL_STR[] = "¡Ú";
+char HOME_STR[] = "¡Ý";
 char PLATFORM_STR[] = "¡á";
 
 void player_init(Player* player)
 {
 	player->bounce.isJump = 1;
-	player->bounce.jumpTime = 70 / 1000.0f;
+	player->bounce.jumpTime = 70; // 1000.0f;
 	player->bounce.isTop = 0;
 
 	player->position.x = 2;		// ÇÃ·¹ÀÌ¾î ÃÊ±â ÁÂÇ¥
@@ -25,10 +26,20 @@ void player_init(Player* player)
 
 void potal_init(Object* potal, int stage)
 {
-	potal->position.x = 120;		// ÇÃ·¹ÀÌ¾î ÃÊ±â ÁÂÇ¥
+	potal->position.x = 120;		// Æ÷Å» ÃÊ±â ÁÂÇ¥
 	potal->position.y = 28;
 
 	strcpy(potal->strobject, POTAL_STR);
+
+	return;
+}
+
+void home_init(Object* home)
+{
+	home->position.x = 122;		// Æ÷Å» ÃÊ±â ÁÂÇ¥
+	home->position.y = 0;
+
+	strcpy(home->strobject, HOME_STR);
 
 	return;
 }
@@ -45,25 +56,40 @@ void platform_init(Object* platfrom, int plus)
 }
 
 // Æ÷Å» À§Ä¡ 
-void potal_position(Object* potal, int stage)
+void object_position(Player* player, Object* potal, Object* home, int stage)
 {
 	switch (stage)
 	{
 	case 1:
 		potal->position.x = 120;
 		potal->position.y = 28;
+
+		home->position.x = 122;
+		home->position.y = 0;
 		break;
 	case 2:
-		potal->position.x = 120;
+		potal->position.x = 122;
 		potal->position.y = 5;
+
+		home->position.x = 122;
+		home->position.y = 0;
 		break;
 	case 3:
 		potal->position.x = 2;
 		potal->position.y = 29;
+
+		player->position.x = 122;
+		player->position.y = 9;
+
+		home->position.x = 122;
+		home->position.y = 29;
 		break;
 	case 4:
-		potal->position.x = 1;	
-		potal->position.y = 122;
+		potal->position.x = 62;	
+		potal->position.y = 29;
+
+		home->position.x = 122;
+		home->position.y = 0;
 		break;
 	}
 
