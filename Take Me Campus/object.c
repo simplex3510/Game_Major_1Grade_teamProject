@@ -57,9 +57,13 @@ void potal_position(Object* potal, int stage)
 		potal->position.x = 120;
 		potal->position.y = 5;
 		break;
-	default:
-		potal->position.x = 20;	
-		potal->position.y = 20;
+	case 3:
+		potal->position.x = 2;
+		potal->position.y = 29;
+		break;
+	case 4:
+		potal->position.x = 1;	
+		potal->position.y = 122;
 		break;
 	}
 

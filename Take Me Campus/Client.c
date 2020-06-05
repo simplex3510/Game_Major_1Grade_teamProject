@@ -140,12 +140,13 @@ void render()
 			stage2Colide(&player, &platform[i]);
 		}*/
 		break;
-	/*case 3:
+	case 3:
 		stage3();
-		break;*/
+		break;
 	case 4:
 		stageEnding();
-		LOOP = FALSE;
+		screenPrint(25, 25, "Good Choice!");
+		//LOOP = FALSE;
 		break;
 	default:
 		stage1();
@@ -263,7 +264,6 @@ int main()
 
 		nKey = getKeyEvent();
 		if (nKey == ESC) {		// ESC 입력
-
 			break;				// 반복 탈출 후, 게임 종료
 		}
 
