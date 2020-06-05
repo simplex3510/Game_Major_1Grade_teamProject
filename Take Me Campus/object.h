@@ -42,7 +42,9 @@ void player_init(Player* player);
 
 void potal_init(Object* potal, int stage);
 
+void home_init(Object* home);
+
 void platform_init(Object* platfrom, int plus);
 
-void potal_position(Object* potal, int stage);
+void object_position(Player* player, Object* potal, Object* home, int stage);
 

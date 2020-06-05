@@ -138,12 +138,21 @@ void stage3()
 	screenPrint(0, 22, "¡á");		screenPrint(20, 22, "¡á¡á¡á¡á");	screenPrint(28, 22, "¡á¡á¡á¡á");					  screenPrint(124, 22, "¡á");
 	screenPrint(0, 23, "¡á");		screenPrint(20, 23, "¡á¡á¡á¡á");	screenPrint(28, 23, "¡á¡á¡á¡á");					  screenPrint(124, 23, "¡á");
 	screenPrint(0, 24, "¡á");		screenPrint(20, 24, "¡á¡á¡á¡á");	screenPrint(28, 24, "¡á¡á¡á¡á¡á¡á¡á¡á");					  screenPrint(124, 24, "¡á");
-	screenPrint(0, 25, "¡á");	screenPrint(2, 25, "¡á¡á¡á¡á¡â¡â");	screenPrint(20, 25, "¡á¡á¡á¡á");	screenPrint(28, 25, "¡á¡á¡á¡á¡á¡á¡á¡á");					  screenPrint(124, 25, "¡á");
+	screenPrint(0, 25, "¡á");	screenPrint(2, 25, "¡á¡á¡á¡â¡â¡á");	screenPrint(20, 25, "¡á¡á¡á¡á");	screenPrint(28, 25, "¡á¡á¡á¡á¡á¡á¡á¡á");					  screenPrint(124, 25, "¡á");
 	screenPrint(0, 26, "¡á");	screenPrint(2, 26, "¡á¡á¡á¡á¡á¡á");	screenPrint(20, 26, "¡á¡á¡á¡á");	screenPrint(28, 26, "¡á¡á¡á¡á¡á¡á¡á¡á");					  screenPrint(124, 26, "¡á");
 	screenPrint(0, 27, "¡á");		screenPrint(20, 27, "¡á¡á¡á¡á");	screenPrint(28, 27, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		screenPrint(80, 27, "¡á¡á¡á¡á");			  screenPrint(124, 27, "¡á");
 	screenPrint(0, 28, "¡á");		screenPrint(20, 28, "¡á¡á¡á¡á");	screenPrint(28, 28, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		screenPrint(80, 28, "¡á¡á¡á¡á");			  screenPrint(124, 28, "¡á");
 	screenPrint(0, 29, "¡á");		screenPrint(20, 29, "¡á¡á¡á¡á");	screenPrint(28, 29, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		screenPrint(80, 29, "¡á¡á¡á¡á");			  screenPrint(124, 29, "¡á");
-	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
+	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
+
+
+	screenPrint(101, 2, "¡ç Campus");
+	screenPrint(118, 2, "Home¡é");
+
+	screenPrint(2, 2, "You finally decided to go...");
+	screenPrint(2, 3, "Anyway, You can use 7016.");
+
+
 }
 
 void stageEnding()
