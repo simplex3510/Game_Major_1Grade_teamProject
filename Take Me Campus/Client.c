@@ -24,6 +24,7 @@ int LOOP = TRUE;
 
 clock_t curTime;
 clock_t oldTime;
+float deltaTime = 0;
 
 Player player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
@@ -36,6 +37,9 @@ void init()
 {
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
+	curTime = (float)clock() / 1000.f;
+	oldTime = (float)clock() / 1000.f;
+	deltaTime = 0;
 	/*for (int i = 0; i < 3; i++)
 	{
 		platform_init(&platform[i], i);
@@ -49,6 +53,7 @@ void init()
 void update()
 {
 	curTime = clock() / 1000.0f;
+	deltaTime = curTime - oldTime;
 	static int count = 0;
 	//player.bounce.isJump = 1;
 
@@ -85,9 +90,9 @@ void update()
 	//}
 
 	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
-	while (player.bounce.jumpTime < (curTime - oldTime)*1) {
+	while (player.bounce.jumpTime < oldTime) {
 
-		dist = speed * ((curTime - oldTime) * 1);
+		dist = speed * (deltaTime * 1);
 
 		// 최고점이 아니라면, 상승한다.
 		if (player.bounce.isTop == 0) {
@@ -204,6 +209,14 @@ void waitRender(clock_t oldTime)
 	}
 }
 
+void waitRender(clock_t oldTime)
+{	
+	while (TRUE) {					// 렌더 후의 시간을 지속적으로 갱신
+		if (10 < curTime - oldTime)			// 두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출, 10으로하니까 60프레임
+			break;
+	}
+}
+
 // 키 인식
 int getKeyEvent()
 {
@@ -274,7 +287,7 @@ int main()
 		sound_update();			// FMOD 업데이트
 
 		render();				// 그래픽 렌더링
-		waitRender(clock());
+		waitRender(oldTime);
 	}
 
 	release();					// 동적할당 헤제
