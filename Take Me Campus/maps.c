@@ -136,3 +136,18 @@ void stage3()
 	screenPrint(0, 29, "¡á");		screenPrint(20, 29, "¡á¡á¡á¡á");	screenPrint(28, 29, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		screenPrint(80, 29, "¡á¡á¡á¡á");			  screenPrint(124, 29, "¡á");
 	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
 }
+
+void stageEnding()
+{
+	screenPrint(106, 2, "Really? Seriously?");
+	screenPrint(110, 7, "Do you wanna"); screenPrint(111, 8, "Go to Campus?");
+	screenPrint(90, 10, "But, Someone Can't even go home.");
+	screenPrint(70, 13, "Isn't it Cool?");
+	screenPrint(50, 16, "senpai or sunbae,");
+	screenPrint(30, 19, "freshman,");
+	screenPrint(10, 22, "Campus life,");
+	screenPrint(20, 25, "We're college"); screenPrint(26, 26, "student.");
+
+	screenPrint(25, 25, "Good Choice!");
+	Sleep(1500);
+}
