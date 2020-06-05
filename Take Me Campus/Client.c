@@ -49,9 +49,9 @@ void update()
 {
 	curTime = clock() / 1000.0f;
 	static int count = 0;
-	player.bounce.isJump = 1;
+	//player.bounce.isJump = 1;
 
-	int speed = 10;
+	int speed = 3;
 	float dist = 1;
 
 	// 즉, 최근 시간과 이전 시간을 빼면 시간차가 나오는데, 이게 일정 수준보다 커야함
@@ -60,55 +60,55 @@ void update()
 
 	//updateTimer();
 
-	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
-	
-		// 최고점이 아니라면, 상승한다.
-		if (player.bounce.isTop == 0) {
-			player.position.y--;
-			count++;
-			// 최고점에 다랐을 경우, 
-			if (count == 3) { player.bounce.isTop = 1; }
-			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
-	
-			return;
-		}
-		// 최고점이라면, 하강한다.
-		else if (player.bounce.isTop == 1) {
-			player.position.y++;
-			count++;
-			// 다시 내려왔을 경우
-			if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
-			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
-			return;
-		}
-	}
-
-	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
-	//while (player.bounce.jumpTime < (curTime - oldTime)*1) {
-
-	//	dist = speed * ((curTime - oldTime) * 1);
-
+	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+	//
 	//	// 최고점이 아니라면, 상승한다.
 	//	if (player.bounce.isTop == 0) {
-	//		player.position.y -= dist;
+	//		player.position.y--;
 	//		count++;
 	//		// 최고점에 다랐을 경우, 
 	//		if (count == 3) { player.bounce.isTop = 1; }
-	//		oldTime = curTime;    // 점프 시점 시각 업데이트
-
+	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+	//
 	//		return;
 	//	}
 	//	// 최고점이라면, 하강한다.
 	//	else if (player.bounce.isTop == 1) {
-	//		player.position.y += dist;
+	//		player.position.y++;
 	//		count++;
 	//		// 다시 내려왔을 경우
 	//		if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
-	//		oldTime = curTime;    // 점프 시점 시각 업데이트
-
+	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 	//		return;
 	//	}
 	//}
+
+	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
+	while (player.bounce.jumpTime < (curTime - oldTime)*1) {
+
+		dist = speed * ((curTime - oldTime) * 1);
+
+		// 최고점이 아니라면, 상승한다.
+		if (player.bounce.isTop == 0) {
+			player.position.y -= dist;
+			count++;
+			// 최고점에 다랐을 경우, 
+			if (count == 3) { player.bounce.isTop = 1; }
+			oldTime = curTime;    // 점프 시점 시각 업데이트
+
+			return;
+		}
+		// 최고점이라면, 하강한다.
+		else if (player.bounce.isTop == 1) {
+			player.position.y += dist;
+			count++;
+			// 다시 내려왔을 경우
+			if (count == 6) { player.bounce.isTop = 0; count = 0; }
+			oldTime = curTime;    // 점프 시점 시각 업데이트
+
+			return;
+		}
+	}
 }
 
 // 화면에 출력

@@ -74,8 +74,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\chic3\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\chic3\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\simplex\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\chic3\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\simplex\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;C:\Users\chic3\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;C:\Users\user\Documents\GitHub\Game_Major_1Grade_teamProject\Take Me Campus\FMOD Studio API Windows\api\lowlevel\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
