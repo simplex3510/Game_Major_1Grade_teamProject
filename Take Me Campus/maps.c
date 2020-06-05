@@ -133,7 +133,7 @@ void stage3()
 	screenPrint(0, 17, "¡á");		screenPrint(20, 17, "¡á¡á¡á¡á");			screenPrint(50, 17, "¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");			  screenPrint(124, 17, "¡á");
 	screenPrint(0, 18, "¡á");		screenPrint(20, 18, "¡á¡á¡á¡á");			screenPrint(50, 18, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		      screenPrint(124, 18, "¡á");
 	screenPrint(0, 19, "¡á");	screenPrint(8, 19, "¡á¡á¡á¡á¡á¡á");	screenPrint(20, 19, "¡á¡á¡á¡á");			screenPrint(44, 19, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");			  screenPrint(124, 19, "¡á");
-	screenPrint(0, 20, "¡á");	screenPrint(8, 20, "¡á¡á¡á¡á¡á¡á");	screenPrint(20, 20, "¡á¡á¡á¡á"); 			screenPrint(44, 20, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");			  screenPrint(124, 20, "¡á");
+	screenPrint(0, 20, "¡á");	/*screenPrint(8, 20, "¡á¡á¡á¡á¡á¡á");*/	screenPrint(20, 20, "¡á¡á¡á¡á"); 			screenPrint(44, 20, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");			  screenPrint(124, 20, "¡á");
 	screenPrint(0, 21, "¡á");		screenPrint(20, 21, "¡á¡á¡á¡á");	screenPrint(28, 21, "¡á¡á¡á¡á");					  screenPrint(124, 21, "¡á");
 	screenPrint(0, 22, "¡á");		screenPrint(20, 22, "¡á¡á¡á¡á");	screenPrint(28, 22, "¡á¡á¡á¡á");					  screenPrint(124, 22, "¡á");
 	screenPrint(0, 23, "¡á");		screenPrint(20, 23, "¡á¡á¡á¡á");	screenPrint(28, 23, "¡á¡á¡á¡á");					  screenPrint(124, 23, "¡á");
@@ -151,7 +151,9 @@ void stage3()
 
 	screenPrint(2, 2, "You finally decided to go...");
 	screenPrint(2, 3, "Anyway, You can use 7016.");
+	screenPrint(9, 20, "SM Campus¢Ù");
 
+	screenPrint(28, 12, "Well, that's a good idea, bro.");
 
 }
 
