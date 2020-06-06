@@ -1,5 +1,7 @@
 #pragma once
-
+#include "screen.h"
+#include "object.h"
+#include "GroundCheck.h"
 
 void stage1();
 void stage2();

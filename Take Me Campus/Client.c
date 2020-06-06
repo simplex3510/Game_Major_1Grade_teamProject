@@ -1,14 +1,14 @@
+#pragma once
 #pragma warning (disable:4996)
 
 #include <stdio.h>			// 표준 입출력 헤더
 #include <conio.h>			// 입출력, 표준에서 벗어남
 
 #include "screen.h"			// 렌더링 처리 헤더
-#include "colide.h"			// 스테이지 별 충돌 체크
 #include "maps.h"
 #include "object.h"
 #include "SoundManager.h"
-#include "Timer.h"
+#include "GroundCheck.h"
 
 
 #define TRUE 1
@@ -21,6 +21,8 @@
 #define RIGHT 77
 
 int LOOP = TRUE;
+int isColide = FALSE;
+int* isColide_ptr = &isColide;
 
 clock_t curTime;
 clock_t oldTime;
@@ -28,44 +30,49 @@ clock_t oldTime;
 Player player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
 Object home;
-//Object platform[5];
+Object side[3];
+
+MMX player_check;
+MMX platform;
+MMX fence;
+
+MMX platform_stage2_2;
 
 static int stage = 1;
+
+
 
 void init()
 {
 	player_init(&player);		// 플레이어 초기화
 	potal_init(&potal, stage);	// 포탈 초기화
 	home_init(&home);
-	/*for (int i = 0; i < 3; i++)
-	{
-		platform_init(&platform[i], i);
-	}*/
-
-	//initTimer();				// 타이머 초기화
 
 	sound_init();				// FMOD 초기화
+	
+	for (int i = 0; i < 3; i++)
+		side_init(&side[i], i);
+
+	// 맵 프레임 충돌체
+	fence.max.x = 122;	fence.max.y = 29;
+	fence.min.x = 2;	fence.min.y = 29;
+	DrawCheck(player_check, fence);
+
 }
 
 void update()
 {
-	clock_t curTime = clock() / 1000.0f;
+	clock_t curTime = clock();
 	static int count = 0;
-	//player.bounce.isJump = 1;
-
-	int speed = 3;
-	float dist = 1;
 
 	// 즉, 최근 시간과 이전 시간을 빼면 시간차가 나오는데, 이게 일정 수준보다 커야함
 	// -> 점프와 점프 사이의 시간적 간격 = 점프 속도
 	// 점프와 점프사이의 시간차 < (최근시간 - 이전 시간)
 
-	//updateTimer();
-
 	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
 	//
 	//	// 최고점이 아니라면, 상승한다.
-	//	if (player.bounce.isTop == 0) {
+	//	if ((player.bounce.isTop == 0) || (*isColide_ptr == TRUE)) {
 	//		player.position.y--;
 	//		count++;
 	//		// 최고점에 다랐을 경우, 
@@ -75,39 +82,36 @@ void update()
 	//		return;
 	//	}
 	//	// 최고점이라면, 하강한다.
-	//	else if (player.bounce.isTop == 1) {
+	//	else if ((player.bounce.isTop == 1) || (*isColide_ptr == FALSE)) {
 	//		player.position.y++;
 	//		count++;
 	//		// 다시 내려왔을 경우
-	//		if (count == 6) { player.bounce.isTop = 0; player.bounce.isJump = 0; count = 0; }
+	//		if (count == 6) { player.bounce.isTop = 0; count = 0; }
 	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 	//		return;
 	//	}
 	//}
 
-	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime))
-	while (player.bounce.jumpTime < (curTime - oldTime)*1) {
-	
-		dist = speed * ((curTime - oldTime) * 1);
-	
+	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+
 		// 최고점이 아니라면, 상승한다.
-		if (player.bounce.isTop == 0) {
-			player.position.y -= dist;
-			count++;
+		if ( (TRUE <= *isColide_ptr) && (*isColide_ptr <= 4) ) {
+			player.position.y--;
+			(*isColide_ptr)++;
 			// 최고점에 다랐을 경우, 
-			if (count == 3) { player.bounce.isTop = 1; }
-			oldTime = curTime;    // 점프 시점 시각 업데이트
-	
+			if (*isColide_ptr == 4) {
+				*isColide_ptr = FALSE;
+			}
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+
 			return;
 		}
 		// 최고점이라면, 하강한다.
-		else if (player.bounce.isTop == 1) {
-			player.position.y += dist;
-			count++;
+		else if ( (*isColide_ptr == FALSE) ) {
+			player.position.y++;
 			// 다시 내려왔을 경우
-			if (count == 6) { player.bounce.isTop = 0; count = 0; }
-			oldTime = curTime;    // 점프 시점 시각 업데이트
-	
+			//if (*isColide_ptr == TRUE) { player.bounce.isTop = 0; count = 0; }
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 			return;
 		}
 	}
@@ -120,7 +124,13 @@ void render()
 	screenClear();
 
 	char string[100] = { 0, };
-	char str_stage[100] = { 0, };
+	char str_stage[50] = { 0, };
+	char str_colide[20] = { 0, };
+
+	player_check.min.x = player.position.x;
+	player_check.min.y = player.position.y;
+	player_check.max.x = player.position.x + 1;
+	player_check.max.y = player.position.y;
 
 	// 포탈 충돌 체크, 다음 스테이지
 	if ((player.position.x == potal.position.x) &&
@@ -140,21 +150,66 @@ void render()
 	{
 	case 1:
 		stage1();
+
+		if (DrawCheck(player_check, fence) == true)
+			*isColide_ptr = TRUE;
+
 		break;
 	case 2:
 		stage2();
-		/*for (int i = 0; i < 3; i++) {
-			screenPrint(platform[i].position.x, platform[i].position.y, platform[i].strobject);
-			stage2Colide(&player, &platform[i]);
-		}*/
+
+		// 절벽 옆부분 막아놓음
+		stage2_Colide_side(&player, &side[0]);
+		stage2_Colide_side(&player, &side[1]);
+		stage2_Colide_side(&player, &side[2]);
+
+		// 절벽 위 충돌체
+		stage2_Colide0(&platform);
+
+		// 첫 번째 플랫폼 충돌체
+		stage2_Colide1(&platform_stage2_2);
+
+		DrawCheck(player_check, platform_stage2_2);
+		if (DrawCheck(player_check, platform_stage2_2) == true)
+			*isColide_ptr = TRUE;
+
+
+		DrawCheck(player_check, platform);
+		if (DrawCheck(player_check, platform) == true) 
+			*isColide_ptr = TRUE;
+
+		DrawCheck(player_check, fence);
+		if (DrawCheck(player_check, fence) == true)
+			*isColide_ptr = TRUE;
+
 		break;
+
 	case 3:
-		stage3();
-		
+		stage3(&platform);
+
+		DrawCheck(player_check, platform);
+		if (DrawCheck(player_check, platform) == true)
+			*isColide_ptr = TRUE;
+
+		DrawCheck(player_check, fence);
+		if (DrawCheck(player_check, fence) == true)
+			*isColide_ptr = TRUE;
+
 		break;
+
 	case 4:
-		stageEnding();
+		stageEnding(&platform);
+
+		DrawCheck(player_check, platform);
+		if (DrawCheck(player_check, platform) == true)
+			*isColide_ptr = TRUE;
+
+		DrawCheck(player_check, fence);
+		if (DrawCheck(player_check, fence) == true)
+			*isColide_ptr = TRUE;
+
 		break;
+
 	default:
 		stage1();
 		LOOP = FALSE;
@@ -189,8 +244,10 @@ void render()
 	}
 
 
-	sprintf(string, "스테이지: %d", stage);
-	screenPrint(50, 0, string);
+	sprintf(str_colide, "충돌: %d", isColide);
+	screenPrint(70, 0, str_colide);
+	sprintf(str_stage, "스테이지: %d", stage);
+	screenPrint(50, 0, str_stage);
 	sprintf(string, "캐릭터 이동 좌표: (%f, %f)", player.position.x, player.position.y);
 	screenPrint(0, 0, string);
 
@@ -209,7 +266,7 @@ void waitRender(clock_t oldTime)
 {
 	while (TRUE) {
 
-		curTime = clock();					// 렌더 후의 시간을 지속적으로 갱신
+		curTime = clock();			// 렌더 후의 시간을 지속적으로 갱신
 		if (10 < curTime - oldTime)			// 두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출, 10으로하니까 60프레임
 			break;
 	}
@@ -285,7 +342,7 @@ int main()
 		sound_update();			// FMOD 업데이트
 
 		render();				// 그래픽 렌더링
-		waitRender(clock());
+		waitRender(oldTime);
 	}
 
 	release();					// 동적할당 헤제

@@ -1,5 +1,4 @@
-#include "screen.h"
-#include "object.h"
+#include "maps.h"
 
 #pragma warning (disable:4996)
 
@@ -71,6 +70,7 @@ void stage1()
 
 void stage2()
 {
+	// 맵
 	screenPrint(0, 1, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 	screenPrint(0, 2, "■");                          screenPrint(124, 2, "■");
 	screenPrint(0, 3, "■");                                 screenPrint(124, 3, "■");
@@ -94,7 +94,7 @@ void stage2()
 	screenPrint(0, 21, "■");   screenPrint(10, 21, "■■■■■■■■");                       screenPrint(124, 21, "■");
 	screenPrint(0, 22, "■");                          screenPrint(124, 22, "■");
 	screenPrint(0, 23, "■");                          screenPrint(124, 23, "■");
-	screenPrint(0, 24, "■");   screenPrint(25, 24, "■■■■");                       screenPrint(124, 24, "■");
+	screenPrint(0, 24, "■");   screenPrint(26, 24, "■■■■");                       screenPrint(124, 24, "■");
 	screenPrint(0, 25, "■");                          screenPrint(124, 25, "■");
 	screenPrint(0, 26, "■");                          screenPrint(124, 26, "■");
 	screenPrint(0, 27, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");                          screenPrint(124, 27, "■");
@@ -112,8 +112,15 @@ void stage2()
 	screenPrint(20, 25, "We're college"); screenPrint(26, 26, "student.");
 }
 
-void stage3()
+void stage3(MMX* platform)
 {
+	// 충돌체
+	platform->min.x = 90;
+	platform->min.y = 0;
+	platform->max.x = 91;
+	platform->max.y = 0;
+
+
 	screenPrint(0, 1, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 	screenPrint(0, 2, "■");								  screenPrint(124, 2, "■");
 	screenPrint(0, 3, "■");								  screenPrint(124, 3, "■");
@@ -133,7 +140,7 @@ void stage3()
 	screenPrint(0, 17, "■");		screenPrint(20, 17, "■■■■");			screenPrint(50, 17, "■■■■■■■■△△■■■■■△△■■■■■△△■■■■■■■■■■■■■");			  screenPrint(124, 17, "■");
 	screenPrint(0, 18, "■");		screenPrint(20, 18, "■■■■");			screenPrint(50, 18, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");		      screenPrint(124, 18, "■");
 	screenPrint(0, 19, "■");	screenPrint(8, 19, "■■■■■■");	screenPrint(20, 19, "■■■■");			screenPrint(44, 19, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");			  screenPrint(124, 19, "■");
-	screenPrint(0, 20, "■");	/*screenPrint(8, 20, "■■■■■■");*/	screenPrint(20, 20, "■■■■"); 			screenPrint(44, 20, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");			  screenPrint(124, 20, "■");
+	screenPrint(0, 20, "■");										screenPrint(20, 20, "■■■■"); 			screenPrint(44, 20, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");			  screenPrint(124, 20, "■");
 	screenPrint(0, 21, "■");		screenPrint(20, 21, "■■■■");	screenPrint(28, 21, "■■■■");					  screenPrint(124, 21, "■");
 	screenPrint(0, 22, "■");		screenPrint(20, 22, "■■■■");	screenPrint(28, 22, "■■■■");					  screenPrint(124, 22, "■");
 	screenPrint(0, 23, "■");		screenPrint(20, 23, "■■■■");	screenPrint(28, 23, "■■■■");					  screenPrint(124, 23, "■");
@@ -153,12 +160,22 @@ void stage3()
 	screenPrint(2, 3, "Anyway, You can use 7016.");
 	screenPrint(9, 20, "SM Campus↘");
 
-	screenPrint(28, 12, "Well, that's a good idea, bro.");
+	screenPrint(68, 12, "Well, that's a good idea, bro.");
+	screenPrint(29, 12, "If you don't go out of the house,");
+	screenPrint(50, 21, "They can go home.");
+	screenPrint(73, 21, "Please stay at home.");
+	screenPrint(100, 21, "Let's Go Home! ↘");
 
 }
 
-void stageEnding()
+void stageEnding(MMX* platform)
 {
+	// 충돌체
+	platform->min.x = 90;
+	platform->min.y = 0;
+	platform->max.x = 91;
+	platform->max.y = 0;
+
 	screenPrint(0, 1, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 	screenPrint(0, 2, "■");								  screenPrint(124, 2, "■");
 	screenPrint(0, 3, "■");								  screenPrint(124, 3, "■");
@@ -190,5 +207,6 @@ void stageEnding()
 	screenPrint(0, 29, "■");								  screenPrint(124, 29, "■");
 	screenPrint(0, 30, "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 
-	screenPrint(25, 25, "Good Choice!");
+	screenPrint(10, 2, "I'm sorry. To show you this, I've focused your attention. ");
+	screenPrint(10, 3, "asdasd");
 }

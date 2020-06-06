@@ -14,7 +14,6 @@ typedef struct {
 
 typedef struct {
 	// 바운스 애니메이션 용
-	int isJump;			// 공중에 뜬 상태인가 (0은 지면에 붙음, 1은 공중에 뜸)
 	int isTop;
 	clock_t jumpTime;	// 점프를 하고 있는 시간
 	clock_t oldTime;	// 마지막으로 점프한 시간, 기준이 되는 시간
@@ -44,7 +43,7 @@ void potal_init(Object* potal, int stage);
 
 void home_init(Object* home);
 
-void platform_init(Object* platfrom, int plus);
+void side_init(Object* platfrom, int plus);
 
 void object_position(Player* player, Object* potal, Object* home, int stage);
 

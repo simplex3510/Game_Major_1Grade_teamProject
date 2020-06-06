@@ -12,8 +12,7 @@ char PLATFORM_STR[] = "■";
 
 void player_init(Player* player)
 {
-	player->bounce.isJump = 1;
-	player->bounce.jumpTime = 70 / 1000.0f;
+	player->bounce.jumpTime = 70;
 	player->bounce.isTop = 0;
 
 	player->position.x = 2;		// 플레이어 초기 좌표
@@ -44,13 +43,12 @@ void home_init(Object* home)
 	return;
 }
 
-void platform_init(Object* platfrom, int plus)
+void side_init(Object* side, int plus)
 {
-	platfrom->isColide = TRUE;
-	platfrom->position.x = 112;
-	platfrom->position.y = 29 - plus;
+	side->position.x = 110;
+	side->position.y = 28 - plus;
 
-	strcpy(platfrom->strobject, PLATFORM_STR);
+	strcpy(side->strobject, PLATFORM_STR);
 
 	return;
 }
