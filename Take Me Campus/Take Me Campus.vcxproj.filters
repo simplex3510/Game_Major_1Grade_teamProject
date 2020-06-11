@@ -30,13 +30,13 @@
     <ClCompile Include="SoundManager.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="GroundCheck.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Client.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,6 +8,7 @@ bool DrawCheck(MMX a, MMX b)
 	if (a.max.y < b.min.y || a.min.y > b.max.y) return 0;
 	return 1;
 }
+
 void stage2_Colide_side(Player* player, Object* side)
 {
 	if ((player->position.x == side->position.x) &&
@@ -20,7 +21,7 @@ void stage2_Colide_side(Player* player, Object* side)
 void stage2_Colide0(MMX* platform)
 {
 	platform->min.x = 2;
-	platform->min.y = 26;
+	platform->min.y = 27;
 	platform->max.x = 110;
 	platform->max.y = 29;
 }

@@ -150,7 +150,7 @@ void stage3(MMX* platform)
 	screenPrint(0, 27, "¡á");		screenPrint(20, 27, "¡á¡á¡á¡á");	screenPrint(28, 27, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		screenPrint(80, 27, "¡á¡á¡á¡á");			  screenPrint(124, 27, "¡á");
 	screenPrint(0, 28, "¡á");		screenPrint(20, 28, "¡á¡á¡á¡á");	screenPrint(28, 28, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		screenPrint(80, 28, "¡á¡á¡á¡á");			  screenPrint(124, 28, "¡á");
 	screenPrint(0, 29, "¡á");		screenPrint(20, 29, "¡á¡á¡á¡á");	screenPrint(28, 29, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");		screenPrint(80, 29, "¡á¡á¡á¡á");			  screenPrint(124, 29, "¡á");
-	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
+	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
 
 
 	screenPrint(101, 2, "¡ç Campus");
@@ -207,6 +207,17 @@ void stageEnding(MMX* platform)
 	screenPrint(0, 29, "¡á");								  screenPrint(124, 29, "¡á");
 	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
 
-	screenPrint(10, 2, "I'm sorry. To show you this, I've focused your attention. ");
-	screenPrint(10, 3, "asdasd");
+	screenPrint(40, 2, "I'm sorry. To show you this, I've focused your attention.");
+	screenPrint(40, 4, "We can't take risks.");
+	screenPrint(40, 6, "We don't go to Campus.");
+	screenPrint(40, 8, "We Cam Use E-Campus");
+	screenPrint(40, 10, "...Do you hear me...?");
+	screenPrint(40, 12, "um....Anyway, Good End. Bye!");
+
+	screenPrint(56, 20, "-Developed By-");
+	screenPrint(58, 21, "Kim Min Jun");
+	screenPrint(58, 22, "Park Se Jin");
+	screenPrint(58, 23, "Lee Yun Seok");
+	screenPrint(58, 24, "Im Ji Hun");
+
 }

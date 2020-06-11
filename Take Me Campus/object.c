@@ -12,7 +12,7 @@ char PLATFORM_STR[] = "■";
 
 void player_init(Player* player)
 {
-	player->bounce.jumpTime = 70;
+	player->bounce.jumpTime = 50;	// 플레이어 부유 시간
 	player->bounce.isTop = 0;
 
 	player->position.x = 2;		// 플레이어 초기 좌표
@@ -83,7 +83,7 @@ void object_position(Player* player, Object* potal, Object* home, int stage)
 		home->position.y = 29;
 		break;
 	case 4:
-		potal->position.x = 62;	
+		potal->position.x = 64;	
 		potal->position.y = 29;
 
 		home->position.x = 122;

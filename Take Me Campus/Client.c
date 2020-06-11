@@ -50,7 +50,6 @@ MMX platform_stage2_2;
 static int stage = 1;
 
 
-
 void init()
 {
 	player_init(&player);		// 플레이어 초기화
@@ -120,11 +119,11 @@ void update()
 	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
 
 		// 최고점이 아니라면, 상승한다.
-		if ( (TRUE <= *isColide_ptr) && (*isColide_ptr <= 4) ) {
-			player.position.y--;
+		if ( (TRUE <= *isColide_ptr) && (*isColide_ptr <= 6) ) {
+			player.position.y -= 0.5;
 			(*isColide_ptr)++;
 			// 최고점에 다랐을 경우, 
-			if (*isColide_ptr == 4) {
+			if (*isColide_ptr == 6) {
 				*isColide_ptr = FALSE;
 			}
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
@@ -133,7 +132,7 @@ void update()
 		}
 		// 최고점이라면, 하강한다.
 		else if ( (*isColide_ptr == FALSE) ) {
-			player.position.y++;
+			player.position.y += 0.5;
 			// 다시 내려왔을 경우
 			//if (*isColide_ptr == TRUE) { player.bounce.isTop = 0; count = 0; }
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
@@ -237,9 +236,10 @@ void render()
 		break;
 
 	case 3:
+		// 스테이지3 불러오기
 		stage3(&platform);
 
-		MMX a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
+		MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
 		MMX t1, t2, t3, t4, t5, t6, t7, t8;
 		MMX w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16;
 
@@ -264,7 +264,7 @@ void render()
 
 		addDrawCheck(&d, 52, 29, 76);
 		addDrawCheck(&e, 44, 26, 50);
-		addDrawCheck(&f, 36, 23, 42);
+		addDrawCheck(&F, 36, 23, 42);
 		addDrawCheck(&g, 28, 20, 40);
 		addDrawCheck(&h, 44, 18, 48);
 		addDrawCheck(&i, 50, 16, 64);
