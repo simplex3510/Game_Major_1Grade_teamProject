@@ -60,6 +60,14 @@ void init()
 
 }
 
+void addDrawCheck(MMX * a,float mx,float my,float Mx)
+{
+	a->max.x = Mx;
+	a->max.y = my + 1;
+	a->min.x = mx;
+	a->min.y = my;
+}
+
 void update()
 {
 	clock_t curTime = clock();
@@ -158,6 +166,9 @@ void render()
 	case 2:
 		stage2();
 
+		MMX wcs, cl, f, sos, Iic, bscegh, dywgtc;
+		
+
 		// 절벽 옆부분 막아놓음
 		stage2_Colide_side(&player, &side[0]);
 		stage2_Colide_side(&player, &side[1]);
@@ -182,10 +193,22 @@ void render()
 		if (DrawCheck(player_check, fence) == true)
 			*isColide_ptr = TRUE;
 
+		addDrawCheck(&wcs, 12.5, 23.5, 16.5);
+		addDrawCheck(&cl, 5, 20.5, 13);
+		addDrawCheck(&f, 15, 17.5, 23);
+		addDrawCheck(&sos, 25, 14.5, 33);
+		addDrawCheck(&Iic, 35, 11.5, 43);
+		addDrawCheck(&bscegh, 45, 8.5, 53);
+		addDrawCheck(&dywgtc, 55,5.5, 60);
+
 		break;
 
 	case 3:
 		stage3(&platform);
+
+		MMX a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
+		MMX t1, t2, t3, t4, t5, t6, t7, t8;
+
 
 		DrawCheck(player_check, platform);
 		if (DrawCheck(player_check, platform) == true)
@@ -194,6 +217,50 @@ void render()
 		DrawCheck(player_check, fence);
 		if (DrawCheck(player_check, fence) == true)
 			*isColide_ptr = TRUE;
+
+		{addDrawCheck(&a, 104, 29, 122);
+
+		addDrawCheck(&t1, 100, 29, 102);
+
+		addDrawCheck(&b, 88, 29, 98);
+		addDrawCheck(&c, 80, 26, 86);
+
+		addDrawCheck(&t2, 74, 29, 78);
+
+		addDrawCheck(&d, 52, 29, 72);
+		addDrawCheck(&e, 44, 26, 50);
+		addDrawCheck(&f, 36, 23, 42);
+		addDrawCheck(&g, 28, 20, 40);
+		addDrawCheck(&h, 44, 18, 48);
+		addDrawCheck(&i, 50, 16, 64);
+
+		addDrawCheck(&t3, 66, 16, 68);
+		addDrawCheck(&j, 70, 16, 78);
+		addDrawCheck(&t4, 80, 16, 82);
+		addDrawCheck(&k, 84, 16, 92);
+		addDrawCheck(&t5, 94, 16, 96);
+		addDrawCheck(&l, 98, 16, 122);
+
+
+		addDrawCheck(&m, 116, 12, 122);
+		addDrawCheck(&n, 104, 8, 110);
+		addDrawCheck(&o, 52, 7, 102);
+		addDrawCheck(&t6, 48, 7, 50);
+		addDrawCheck(&p, 12, 7, 46);
+
+		addDrawCheck(&q, 8, 13, 10);
+		addDrawCheck(&t7, 4, 13, 6);
+		addDrawCheck(&r, 2, 13, 2);
+
+		addDrawCheck(&s, 8, 18, 18);
+
+		addDrawCheck(&t, 2, 24, 6);
+		addDrawCheck(&t8, 8, 24, 10);
+		addDrawCheck(&u, 12, 24, 12);
+		
+		addDrawCheck(&u, 12, 24, 12);
+		addDrawCheck(&v, 2, 29, 18);
+		}
 
 		break;
 
