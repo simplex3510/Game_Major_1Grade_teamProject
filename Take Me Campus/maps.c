@@ -207,6 +207,10 @@ void stageEnding(MMX* platform)
 	screenPrint(0, 29, "¡á");								  screenPrint(124, 29, "¡á");
 	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
 
-	screenPrint(10, 2, "I'm sorry. To show you this, I've focused your attention. ");
-	screenPrint(10, 3, "asdasd");
+	screenPrint(10, 2, "I'm sorry. To show you this, I've focused your attention.");
+	screenPrint(10, 3, "We can't take risks.");
+	screenPrint(10, 4, "We don't go to Campus.");
+	screenPrint(10, 5, "We Cam Use E-Campus");
+	screenPrint(10, 6, "...Do you hear me...?");
+	screenPrint(10, 7, "um....Anyway, Good End. Bye!");
 }

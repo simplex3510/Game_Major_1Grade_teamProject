@@ -204,9 +204,10 @@ void render()
 		break;
 
 	case 3:
+		// 스테이지3 불러오기
 		stage3(&platform);
 
-		MMX a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
+		MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
 		MMX t1, t2, t3, t4, t5, t6, t7, t8;
 
 
@@ -229,7 +230,7 @@ void render()
 
 		addDrawCheck(&d, 52, 29, 72);
 		addDrawCheck(&e, 44, 26, 50);
-		addDrawCheck(&f, 36, 23, 42);
+		addDrawCheck(&F, 36, 23, 42);
 		addDrawCheck(&g, 28, 20, 40);
 		addDrawCheck(&h, 44, 18, 48);
 		addDrawCheck(&i, 50, 16, 64);
