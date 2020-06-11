@@ -150,7 +150,7 @@
     <ClCompile Include="object.c" />
     <ClCompile Include="sceen.c" />
     <ClCompile Include="SoundManager.c" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="stdafx.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GroundCheck.h" />

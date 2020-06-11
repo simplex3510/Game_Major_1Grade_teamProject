@@ -41,7 +41,6 @@ MMX platform_stage2_2;
 static int stage = 1;
 
 
-
 void init()
 {
 	player_init(&player);		// 플레이어 초기화
@@ -103,11 +102,11 @@ void update()
 	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
 
 		// 최고점이 아니라면, 상승한다.
-		if ( (TRUE <= *isColide_ptr) && (*isColide_ptr <= 4) ) {
-			player.position.y--;
+		if ( (TRUE <= *isColide_ptr) && (*isColide_ptr <= 6) ) {
+			player.position.y -= 0.5;
 			(*isColide_ptr)++;
 			// 최고점에 다랐을 경우, 
-			if (*isColide_ptr == 4) {
+			if (*isColide_ptr == 6) {
 				*isColide_ptr = FALSE;
 			}
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
@@ -116,7 +115,7 @@ void update()
 		}
 		// 최고점이라면, 하강한다.
 		else if ( (*isColide_ptr == FALSE) ) {
-			player.position.y++;
+			player.position.y += 0.5;
 			// 다시 내려왔을 경우
 			//if (*isColide_ptr == TRUE) { player.bounce.isTop = 0; count = 0; }
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
