@@ -259,8 +259,81 @@ void render()
 		addDrawCheck(&t8, 8, 24, 10);
 		addDrawCheck(&u, 12, 24, 12);
 		
-		addDrawCheck(&u, 12, 24, 12);
 		addDrawCheck(&v, 2, 29, 18);
+		}
+
+		{
+			if (DrawCheck(player_check, a) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, t1) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, b) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, c) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, t2) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, d) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, e) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, f) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, g) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, h) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, i) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, t3) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, j) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, t4) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, k) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, t5) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, l) == true)
+				*isColide_ptr = TRUE;
+
+
+			if (DrawCheck(player_check, m) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, n) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, o) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, t6) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, p) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, q) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, t7) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, r) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, s) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, t) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, t8) == true)
+				*isColide_ptr = TRUE;
+			if (DrawCheck(player_check, u) == true)
+				*isColide_ptr = TRUE;
+
+			if (DrawCheck(player_check, v) == true)
+				*isColide_ptr = TRUE;
 		}
 
 		break;
