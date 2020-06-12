@@ -208,11 +208,11 @@ void stageEnding(MMX* platform)
 	screenPrint(0, 30, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");
 
 	screenPrint(40, 2, "I'm sorry. To show you this, I've focused your attention.");
-	screenPrint(40, 4, "We can't take risks.");
-	screenPrint(40, 6, "We don't go to Campus.");
-	screenPrint(40, 8, "We Cam Use E-Campus");
-	screenPrint(40, 10, "...Do you hear me...?");
-	screenPrint(40, 12, "um....Anyway, Good End. Bye!");
+	screenPrint(53, 4, "We can't take risks.");
+	screenPrint(53, 6, "We don't go to Campus.");
+	screenPrint(53, 8, "We Cam Use E-Campus");
+	screenPrint(53, 10, "...Do you hear me...?");
+	screenPrint(49, 12, "um....Anyway, Good End. Bye!");
 
 	screenPrint(56, 20, "-Developed By-");
 	screenPrint(58, 21, "Kim Min Jun");

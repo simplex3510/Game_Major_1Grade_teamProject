@@ -252,18 +252,6 @@ void render()
 
 		MMX wcs, cl, f, sos, Iic, bscegh, dywgtc;
 
-
-		// 절벽 옆부분 막아놓음
-		//stage2_Colide_side(&player, &side[0]);
-		//stage2_Colide_side(&player, &side[1]);
-		//stage2_Colide_side(&player, &side[2]);
-
-		//// 절벽 위 충돌체
-		//stage2_Colide0(&platform);
-
-		//// 첫 번째 플랫폼 충돌체
-		//stage2_Colide1(&platform_stage2_2);
-
 		DrawCheck(player_check, platform_stage2_2);
 		if (DrawCheck(player_check, platform_stage2_2) == true)
 			*isColide_ptr = TRUE;
@@ -367,7 +355,7 @@ void render()
 				*isColide_ptr = TRUE;
 			if (DrawCheck(player_check, e) == true)
 				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, f) == true)
+			if (DrawCheck(player_check, F) == true)
 				*isColide_ptr = TRUE;
 			if (DrawCheck(player_check, g) == true)
 				*isColide_ptr = TRUE;
@@ -509,22 +497,22 @@ void render()
 	// 왼쪽으로 벗어나는 경우 - 클리핑 기술 활용
 	if (player.position.x < 2) {
 		screenPrint(2, player.position.y, player.strobject);
-		player.position.x = 2;
+		player.position.x = 2.0;
 	}
 	// 오른쪽으로 벗어나는 경우
 	else if (122 < player.position.x) {
 		screenPrint(122, player.position.y, player.strobject);
-		player.position.x = 122;
+		player.position.x = 122.0;
 	}
 	// 아래쪽으로 벗어나는 경우
 	else if (29 < player.position.y) {
-		screenPrint(player.position.x, 29, player.strobject);
-		player.position.y = 29;
+		screenPrint(player.position.x, 29.0, player.strobject);
+		player.position.y = 29.0;
 	}
 	// 윗쪽으로 벗어나는 경우
 	else if (player.position.y < 2) {
-		screenPrint(player.position.x, 2, player.strobject);
-		player.position.y = 2;
+		screenPrint(player.position.x, 2.0, player.strobject);
+		player.position.y = 2.0;
 	}
 	// 일반 렌더링
 	else {
@@ -639,7 +627,8 @@ int main()
 	screenRelease();			// 스크린 해제
 	sound_release();			// FMOD 종료
 
-	printf("Thank you for your playing!");
+	printf("\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    Thank you for your playing!\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	Sleep(1500);
 
 	return 0;
 }
