@@ -57,7 +57,7 @@ void init()
 	home_init(&home);
 
 	sound_init();				// FMOD 초기화
-	
+
 	for (int i = 0; i < 3; i++)
 		side_init(&side[i], i);
 
@@ -68,7 +68,7 @@ void init()
 
 }
 
-void addDrawCheck(MMX * a,float mx,float my,float Mx)
+void addDrawCheck(MMX* a, float mx, float my, float Mx)
 {
 	a->max.x = Mx;
 	a->max.y = my + 1;
@@ -76,65 +76,109 @@ void addDrawCheck(MMX * a,float mx,float my,float Mx)
 	a->min.y = my;
 }
 
-void addDrawCheck(MMX* a, float mx, float my,float My)
-{
-	a->max.x = mx;
-	a->max.y = My;
-	a->min.x = mx;
-	a->min.y = my;
-}
+//void addDrawCheck(MMX* a, float mx, float my, float My)
+//{
+//	a->max.x = mx;
+//	a->max.y = My;
+//	a->min.x = mx;
+//	a->min.y = my;
+//}
 
 void update()
 {
 	clock_t curTime = clock();
-	static int count = 0;
 
-	// 즉, 최근 시간과 이전 시간을 빼면 시간차가 나오는데, 이게 일정 수준보다 커야함
-	// -> 점프와 점프 사이의 시간적 간격 = 점프 속도
-	// 점프와 점프사이의 시간차 < (최근시간 - 이전 시간)
-
-	//while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+	//while (player.bounce.jumpTime_middle < (curTime - player.bounce.oldTime)) {
 	//
 	//	// 최고점이 아니라면, 상승한다.
-	//	if ((player.bounce.isTop == 0) || (*isColide_ptr == TRUE)) {
-	//		player.position.y--;
-	//		count++;
+	//	if ((TRUE <= *isColide_ptr) && (*isColide_ptr <= 6)) {
+	//		player.position.y -= 0.5;
+	//		(*isColide_ptr)++;
 	//		// 최고점에 다랐을 경우, 
-	//		if (count == 3) { player.bounce.isTop = 1; }
+	//		if (*isColide_ptr == 6) {
+	//			*isColide_ptr = FALSE;
+	//		}
 	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 	//
 	//		return;
 	//	}
 	//	// 최고점이라면, 하강한다.
-	//	else if ((player.bounce.isTop == 1) || (*isColide_ptr == FALSE)) {
-	//		player.position.y++;
-	//		count++;
+	//	else if (*isColide_ptr == FALSE) {
+	//		player.position.y += 0.5;
 	//		// 다시 내려왔을 경우
-	//		if (count == 6) { player.bounce.isTop = 0; count = 0; }
 	//		player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 	//		return;
 	//	}
 	//}
 
-	while (player.bounce.jumpTime < (curTime - player.bounce.oldTime)) {
+	if ((1 <= *isColide_ptr) && (*isColide_ptr <= 2)) {
+		while (player.bounce.jumpTime_low < (curTime - player.bounce.oldTime)) {
+			
+			// 최고점이 아니라면, 상승한다.
+			player.position.y -= 0.5;
+			(*isColide_ptr)++;
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 
-		// 최고점이 아니라면, 상승한다.
-		if ( (TRUE <= *isColide_ptr) && (*isColide_ptr <= 6) ) {
+			return;
+		}
+	}
+	else if ((3 <= *isColide_ptr) && (*isColide_ptr <= 4)) {
+		while (player.bounce.jumpTime_middle < (curTime - player.bounce.oldTime)) {
+
+			// 최고점이 아니라면, 상승한다.
+			player.position.y -= 0.5;
+			(*isColide_ptr)++;
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+
+			return;
+		}
+	}
+	else if (*isColide_ptr == 5) {
+		while (player.bounce.jumpTime_high < (curTime - player.bounce.oldTime)) {
+
+			// 최고점이 아니라면, 상승한다.
 			player.position.y -= 0.5;
 			(*isColide_ptr)++;
 			// 최고점에 다랐을 경우, 
 			if (*isColide_ptr == 6) {
-				*isColide_ptr = FALSE;
+				*isColide_ptr = -1;
 			}
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 
 			return;
 		}
-		// 최고점이라면, 하강한다.
-		else if ( (*isColide_ptr == FALSE) ) {
+	}
+
+
+	if ((-2 <= *isColide_ptr) && (*isColide_ptr <= -1)) {
+		while (player.bounce.jumpTime_high < (curTime - player.bounce.oldTime)) {
+
+			// 최고점이라면, 하강한다.
 			player.position.y += 0.5;
+			(*isColide_ptr)--;
 			// 다시 내려왔을 경우
-			//if (*isColide_ptr == TRUE) { player.bounce.isTop = 0; count = 0; }
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+			return;
+		}
+	}
+	else if ((-4 <= *isColide_ptr) && (*isColide_ptr <= -3)) {
+		while (player.bounce.jumpTime_middle < (curTime - player.bounce.oldTime)) {
+
+			// 최고점이라면, 하강한다.
+			player.position.y += 0.5;
+			(*isColide_ptr)--;
+			// 다시 내려왔을 경우
+			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
+			return;
+		}
+	}
+	else if (*isColide_ptr < 0) {
+		while (player.bounce.jumpTime_low < (curTime - player.bounce.oldTime)) {
+
+			// 최고점이라면, 하강한다.
+			player.position.y += 0.5;
+			(*isColide_ptr)--;
+			// 다시 내려왔을 경우
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
 			return;
 		}
@@ -142,12 +186,12 @@ void update()
 
 	if (*isWallHitL_ptr == true)
 	{
-		player.position.x--;
+		player.position.x -= 2;
 	}
-	
+
 	if (*isWallHitR_ptr == true)
 	{
-		player.position.x++;
+		player.position.x += 2;
 	}
 }
 
@@ -174,12 +218,12 @@ void render()
 
 	}
 	else if ((player.position.x == home.position.x) &&
-			 (player.position.y == home.position.y)) {
+		(player.position.y == home.position.y)) {
 		stage++;
 		object_position(&player, &potal, &home, stage);
 	}
 
-	if (*isTrapped_ptr==true) {
+	if (*isTrapped_ptr == true) {
 		stage = 1;
 		object_position(&player, &potal, &home, stage);
 
@@ -199,26 +243,25 @@ void render()
 		stage2();
 
 		MMX wcs, cl, f, sos, Iic, bscegh, dywgtc;
-		
+
 
 		// 절벽 옆부분 막아놓음
-		stage2_Colide_side(&player, &side[0]);
-		stage2_Colide_side(&player, &side[1]);
-		stage2_Colide_side(&player, &side[2]);
+		//stage2_Colide_side(&player, &side[0]);
+		//stage2_Colide_side(&player, &side[1]);
+		//stage2_Colide_side(&player, &side[2]);
 
-		// 절벽 위 충돌체
-		stage2_Colide0(&platform);
+		//// 절벽 위 충돌체
+		//stage2_Colide0(&platform);
 
-		// 첫 번째 플랫폼 충돌체
-		stage2_Colide1(&platform_stage2_2);
+		//// 첫 번째 플랫폼 충돌체
+		//stage2_Colide1(&platform_stage2_2);
 
 		DrawCheck(player_check, platform_stage2_2);
 		if (DrawCheck(player_check, platform_stage2_2) == true)
 			*isColide_ptr = TRUE;
 
-
 		DrawCheck(player_check, platform);
-		if (DrawCheck(player_check, platform) == true) 
+		if (DrawCheck(player_check, platform) == true)
 			*isColide_ptr = TRUE;
 
 		DrawCheck(player_check, fence);
@@ -231,7 +274,7 @@ void render()
 		addDrawCheck(&sos, 25, 14.5, 33);
 		addDrawCheck(&Iic, 35, 11.5, 43);
 		addDrawCheck(&bscegh, 45, 8.5, 53);
-		addDrawCheck(&dywgtc, 55,5.5, 60);
+		addDrawCheck(&dywgtc, 55, 5.5, 60);
 
 		break;
 
@@ -292,7 +335,7 @@ void render()
 		addDrawCheck(&t, 2, 24, 6);
 		addDrawCheck(&t8, 8, 24, 10);
 		addDrawCheck(&u, 12, 24, 12);
-		
+
 		addDrawCheck(&v, 2, 29, 18);
 		}
 
@@ -374,7 +417,7 @@ void render()
 		/*맵 벽면 충돌 변수 추가 오른쪽*/
 		{addDrawCheck(&w1, 87, 27, 29);
 		addDrawCheck(&w3, 51, 27, 29);
-		addDrawCheck(&w4, 43, 24,26);
+		addDrawCheck(&w4, 43, 24, 26);
 		addDrawCheck(&w5, 35, 21, 23);
 		addDrawCheck(&w6, 27, 20, 12);
 		addDrawCheck(&w10, 111, 9, 9);
@@ -401,7 +444,7 @@ void render()
 			if (DrawCheck(player_check, w14) == true)
 				*isWallHitR_ptr = TRUE;
 		}
-		
+
 		/*맵 벽면 충돌 변수 추가 왼쪽*/
 		{addDrawCheck(&w2, 79, 27, 29);
 		addDrawCheck(&w7, 43, 19, 20);
@@ -410,7 +453,7 @@ void render()
 		addDrawCheck(&w11, 11, 8, 8);
 		addDrawCheck(&w13, 7, 19, 19);
 		addDrawCheck(&w15, 19, 18, 9);
-		addDrawCheck(&w16, 7, 20,29 );
+		addDrawCheck(&w16, 7, 20, 29);
 		}
 
 		/*맵 벽면 충돌 함수 실행 오른쪽*/

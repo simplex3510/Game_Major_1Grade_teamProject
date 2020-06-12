@@ -15,7 +15,9 @@ typedef struct {
 typedef struct {
 	// 바운스 애니메이션 용
 	int isTop;
-	clock_t jumpTime;	// 점프를 하고 있는 시간
+	clock_t jumpTime_high;	// 점프를 하고 있는 시간
+	clock_t jumpTime_middle;	// 점프를 하고 있는 시간
+	clock_t jumpTime_low;	// 점프를 하고 있는 시간
 	clock_t oldTime;	// 마지막으로 점프한 시간, 기준이 되는 시간
 }Bounce;
 

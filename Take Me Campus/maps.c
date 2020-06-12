@@ -128,10 +128,10 @@ void stage3(MMX* platform)
 	screenPrint(0, 5, "¡á");								  screenPrint(124, 5, "¡á");
 	screenPrint(0, 6, "¡á");								  screenPrint(124, 6, "¡á");
 	screenPrint(0, 7, "¡á");								  screenPrint(124, 7, "¡á");
-	screenPrint(0, 8, "¡á");	screenPrint(12, 8, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");						  screenPrint(124, 8, "¡á");
-	screenPrint(0, 9, "¡á");		screenPrint(20, 9, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");	screenPrint(104, 9, "¡á¡á¡á¡á");					  screenPrint(124, 9, "¡á");
-	screenPrint(0, 10, "¡á");		screenPrint(20, 10, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");						  screenPrint(124, 10, "¡á");
-	screenPrint(0, 11, "¡á");		screenPrint(20, 11, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");						  screenPrint(124, 11, "¡á");
+	screenPrint(0, 8, "¡á");			screenPrint(12, 8,  "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡â¡â¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");											screenPrint(124, 8, "¡á");
+	screenPrint(0, 9, "¡á");			screenPrint(20, 9,  "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");												 screenPrint(124, 9, "¡á");
+	screenPrint(0, 10, "¡á");		screenPrint(20, 10, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");												screenPrint(124, 10, "¡á");
+	screenPrint(0, 11, "¡á");		screenPrint(20, 11, "¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á¡á");												screenPrint(124, 11, "¡á");
 	screenPrint(0, 12, "¡á");		screenPrint(20, 12, "¡á¡á¡á¡á");						  screenPrint(124, 12, "¡á");
 	screenPrint(0, 13, "¡á");		screenPrint(20, 13, "¡á¡á¡á¡á");			screenPrint(116, 13, "¡á¡á¡á¡á");			  screenPrint(124, 13, "¡á");
 	screenPrint(0, 14, "¡á");   screenPrint(2, 14, "¡á¡â¡â¡á¡á");		screenPrint(20, 14, "¡á¡á¡á¡á");						  screenPrint(124, 14, "¡á");
@@ -154,7 +154,7 @@ void stage3(MMX* platform)
 
 
 	screenPrint(101, 2, "¡ç Campus");
-	screenPrint(118, 2, "Home¡é");
+	screenPrint(118, 6, "Home¡é");
 
 	screenPrint(2, 2, "You finally decided to go...");
 	screenPrint(2, 3, "Anyway, You can use 7016.");
