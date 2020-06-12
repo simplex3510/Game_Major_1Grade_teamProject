@@ -210,6 +210,20 @@ void render()
 	player_check.max.x = player.position.x + 1;
 	player_check.max.y = player.position.y;
 
+	// 트랩과 충돌하면
+	if (*isTrapped_ptr == true) {
+
+		stage = 1;
+
+		potal.position.x = 120;
+		potal.position.y = 28;
+
+		home.position.x = 122;
+		home.position.y = 0;
+
+		*isTrapped_ptr = FALSE;
+	}
+
 	// 포탈 충돌 체크, 다음 스테이지
 	if ((player.position.x == potal.position.x) &&
 		(player.position.y == potal.position.y)) {
@@ -218,15 +232,9 @@ void render()
 
 	}
 	else if ((player.position.x == home.position.x) &&
-		(player.position.y == home.position.y)) {
+			 (player.position.y == home.position.y)) {
 		stage++;
 		object_position(&player, &potal, &home, stage);
-	}
-
-	if (*isTrapped_ptr == true) {
-		stage = 1;
-		object_position(&player, &potal, &home, stage);
-
 	}
 
 	// 스테이지 출력
