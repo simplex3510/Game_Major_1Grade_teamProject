@@ -76,13 +76,13 @@ void addDrawCheck(MMX* a, float mx, float my, float Mx)
 	a->min.y = my;
 }
 
-//void addDrawCheck(MMX* a, float mx, float my, float My)
-//{
-//	a->max.x = mx;
-//	a->max.y = My;
-//	a->min.x = mx;
-//	a->min.y = my;
-//}
+void addDrawCheckW(MMX* a, float mx, float my, float My)
+{
+	a->max.x = mx;
+	a->max.y = My;
+	a->min.x = mx;
+	a->min.y = my;
+}
 
 void update()
 {
@@ -411,14 +411,14 @@ void render()
 		}
 
 		/*맵 벽면 충돌 변수 추가 오른쪽*/
-		{addDrawCheck(&w1, 87, 27, 29);
-		addDrawCheck(&w3, 51, 27, 29);
-		addDrawCheck(&w4, 43, 24, 26);
-		addDrawCheck(&w5, 35, 21, 23);
-		addDrawCheck(&w6, 27, 20, 12);
-		addDrawCheck(&w10, 111, 9, 9);
-		addDrawCheck(&w12, 11, 14, 15);
-		addDrawCheck(&w14, 13, 25, 26);
+		{addDrawCheckW(&w1, 87, 27, 29);
+		addDrawCheckW(&w3, 51, 27, 29);
+		addDrawCheckW(&w4, 43, 24, 26);
+		addDrawCheckW(&w5, 35, 21, 23);
+		addDrawCheckW(&w6, 27, 20, 12);
+		addDrawCheckW(&w10, 111, 9, 9);
+		addDrawCheckW(&w12, 11, 14, 15);
+		addDrawCheckW(&w14, 13, 25, 26);
 		}
 
 		/*맵 벽면 충돌 함수 실행 오른쪽*/
@@ -442,14 +442,14 @@ void render()
 		}
 
 		/*맵 벽면 충돌 변수 추가 왼쪽*/
-		{addDrawCheck(&w2, 79, 27, 29);
-		addDrawCheck(&w7, 43, 19, 20);
-		addDrawCheck(&w8, 49, 17, 18);
-		addDrawCheck(&w9, 115, 13, 13);
-		addDrawCheck(&w11, 11, 8, 8);
-		addDrawCheck(&w13, 7, 19, 19);
-		addDrawCheck(&w15, 19, 18, 9);
-		addDrawCheck(&w16, 7, 20, 29);
+		{addDrawCheckW(&w2, 79, 27, 29);
+		addDrawCheckW(&w7, 43, 19, 20);
+		addDrawCheckW(&w8, 49, 17, 18);
+		addDrawCheckW(&w9, 115, 13, 13);
+		addDrawCheckW(&w11, 11, 8, 8);
+		addDrawCheckW(&w13, 7, 19, 19);
+		addDrawCheckW(&w15, 19, 18, 9);
+		addDrawCheckW(&w16, 7, 20, 29);
 		}
 
 		/*맵 벽면 충돌 함수 실행 오른쪽*/
