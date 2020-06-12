@@ -47,6 +47,14 @@ MMX fence;
 
 MMX platform_stage2_2;
 
+typedef struct {
+	float x;
+	float y;
+}saveP;
+
+saveP curPP;
+saveP prevPP;
+
 static int stage = 1;
 
 
@@ -65,7 +73,12 @@ void init()
 	fence.max.x = 122;	fence.max.y = 29;
 	fence.min.x = 2;	fence.min.y = 29;
 	DrawCheck(player_check, fence);
+	
+	curPP.x = player.position.x;
+	curPP.y = player.position.y;
 
+	prevPP.x = player.position.x;
+	prevPP.y = player.position.y;
 }
 
 void addDrawCheck(MMX* a, float mx, float my, float Mx)
@@ -87,6 +100,13 @@ void addDrawCheckW(MMX* a, float mx, float my, float My)
 void update()
 {
 	clock_t curTime = clock();
+	
+	prevPP.x = curPP.x;
+	prevPP.y = curPP.y;
+
+	curPP.x = player.position.x;
+	curPP.y = player.position.y;
+
 
 	//while (player.bounce.jumpTime_middle < (curTime - player.bounce.oldTime)) {
 	//
@@ -184,7 +204,7 @@ void update()
 		}
 	}
 
-	if (*isWallHitL_ptr == true)
+	/*if (*isWallHitL_ptr == true)
 	{
 		player.position.x -= 2;
 	}
@@ -192,7 +212,7 @@ void update()
 	if (*isWallHitR_ptr == true)
 	{
 		player.position.x += 2;
-	}
+	}*/
 }
 
 // 화면에 출력
@@ -278,9 +298,9 @@ void render()
 		// 스테이지3 불러오기
 		stage3(&platform);
 
-		MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
-		MMX t1, t2, t3, t4, t5, t6, t7, t8;
-		MMX w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16;
+		MMX map[] = 0, a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
+		MMX trap[] = 0, t1, t2, t3, t4, t5, t6, t7, t8;
+		//MMX w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16;
 
 
 		DrawCheck(player_check, platform);
@@ -410,7 +430,21 @@ void render()
 				*isColide_ptr = TRUE;
 		}
 
-		/*맵 벽면 충돌 변수 추가 오른쪽*/
+		
+
+
+
+		for (int i = 0; i < 23; i++)
+		{
+			if ((map[i + 1].min.x <= player.position.x) && (map[i + 1].max.x >= player.position.x)
+				&& (map[i + 1].min.y <= player.position.y) && (map[i + 1].max.x >= player.position.x))
+			{
+				player.position.x = prevPP.x;
+				player.position.y = prevPP.y;
+			}
+		}
+
+		/*맵 벽면 충돌 변수 추가 오른쪽
 		{addDrawCheckW(&w1, 87, 27, 29);
 		addDrawCheckW(&w3, 51, 27, 29);
 		addDrawCheckW(&w4, 43, 24, 26);
@@ -419,9 +453,9 @@ void render()
 		addDrawCheckW(&w10, 111, 9, 9);
 		addDrawCheckW(&w12, 11, 14, 15);
 		addDrawCheckW(&w14, 13, 25, 26);
-		}
+		}*/
 
-		/*맵 벽면 충돌 함수 실행 오른쪽*/
+		/*맵 벽면 충돌 함수 실행 오른쪽
 		{
 			if (DrawCheck(player_check, w1) == true)
 				*isWallHitR_ptr = TRUE;
@@ -439,9 +473,9 @@ void render()
 				*isWallHitR_ptr = TRUE;
 			if (DrawCheck(player_check, w14) == true)
 				*isWallHitR_ptr = TRUE;
-		}
+		}*/
 
-		/*맵 벽면 충돌 변수 추가 왼쪽*/
+		/*맵 벽면 충돌 변수 추가 왼쪽
 		{addDrawCheckW(&w2, 79, 27, 29);
 		addDrawCheckW(&w7, 43, 19, 20);
 		addDrawCheckW(&w8, 49, 17, 18);
@@ -450,9 +484,9 @@ void render()
 		addDrawCheckW(&w13, 7, 19, 19);
 		addDrawCheckW(&w15, 19, 18, 9);
 		addDrawCheckW(&w16, 7, 20, 29);
-		}
+		}*/
 
-		/*맵 벽면 충돌 함수 실행 오른쪽*/
+		/*맵 벽면 충돌 함수 실행 오른쪽
 		{
 			if (DrawCheck(player_check, w2) == true)
 				*isWallHitL_ptr = TRUE;
@@ -470,7 +504,7 @@ void render()
 				*isWallHitL_ptr = TRUE;
 			if (DrawCheck(player_check, w16) == true)
 				*isWallHitL_ptr = TRUE;
-		}
+		}*/
 
 
 		break;
