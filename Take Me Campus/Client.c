@@ -1,14 +1,15 @@
-#pragma once
-#pragma warning (disable:4996)
+// #Pragma 지시문은 컴퓨터 또는 운영 체제별 컴파일러 기능을 지정
+#pragma once					// 헤더의 중복을 방지함
+#pragma warning (disable:4996)	// 보안 위험 무시
 
-#include <stdio.h>			// 표준 입출력 헤더
-#include <conio.h>			// 입출력, 표준에서 벗어남
+#include <stdio.h>				// 표준 입출력 헤더
+#include <conio.h>				// 콘솔 입출력 함수 헤더, 표준에서 벗어남
 
-#include "screen.h"			// 렌더링 처리 헤더
-#include "maps.h"
-#include "object.h"
-#include "SoundManager.h"
-#include "GroundCheck.h"
+#include "screen.h"				// 윈도우 화면 출력 처리 헤더
+#include "maps.h"				// 맵 데이터 헤더
+#include "object.h"				// 오브젝트 데이터 헤더
+#include "SoundManager.h"		// 사운드 데이터 헤더
+#include "GroundCheck.h"		// 충돌 관련 헤더
 
 
 #define TRUE 1
@@ -21,16 +22,16 @@
 #define RIGHT 77
 
 int LOOP = TRUE;
-int isColide = FALSE;
+int isColide = FALSE;				// 충돌값
 int* isColide_ptr = &isColide;
 
-int isTrapped = FALSE;
+int isTrapped = FALSE;				// 장애물 충돌
 int* isTrapped_ptr = &isTrapped;
 
-int isWallHitR = FALSE;
+int isWallHitR = FALSE;				// 오른쪽 벽 충돌
 int* isWallHitR_ptr = &isWallHitR;
 
-int isWallHitL = FALSE;
+int isWallHitL = FALSE;				// 왼쪽 벽 충돌
 int* isWallHitL_ptr = &isWallHitL;
 
 clock_t curTime;
@@ -86,7 +87,7 @@ void addDrawCheckW(MMX* a, float mx, float my, float My)
 
 void update()
 {
-	clock_t curTime = clock();
+	curTime = clock();
 
 	//while (player.bounce.jumpTime_middle < (curTime - player.bounce.oldTime)) {
 	//
@@ -187,11 +188,13 @@ void update()
 	if (*isWallHitL_ptr == true)
 	{
 		player.position.x -= 2;
+		*isWallHitL_ptr = FALSE;
 	}
 
 	if (*isWallHitR_ptr == true)
 	{
 		player.position.x += 2;
+		*isWallHitR_ptr = FALSE;
 	}
 }
 
@@ -544,7 +547,7 @@ void waitRender(clock_t oldTime)
 {
 	while (TRUE) {
 
-		curTime = clock();			// 렌더 후의 시간을 지속적으로 갱신
+		curTime = clock();				// 렌더 후의 시간을 지속적으로 갱신
 		if (10 < curTime - oldTime)			// 두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출, 10으로하니까 60프레임
 			break;
 	}
