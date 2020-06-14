@@ -1,15 +1,14 @@
-// #Pragma 지시문은 컴퓨터 또는 운영 체제별 컴파일러 기능을 지정
-#pragma once					// 헤더의 중복을 방지함
-#pragma warning (disable:4996)	// 보안 위험 무시
+#pragma once
+#pragma warning (disable:4996)
 
-#include <stdio.h>				// 표준 입출력 헤더
-#include <conio.h>				// 콘솔 입출력 함수 헤더, 표준에서 벗어남
+#include <stdio.h>			// 표준 입출력 헤더
+#include <conio.h>			// 입출력, 표준에서 벗어남
 
-#include "screen.h"				// 윈도우 화면 출력 처리 헤더
-#include "maps.h"				// 맵 데이터 헤더
-#include "object.h"				// 오브젝트 데이터 헤더
-#include "SoundManager.h"		// 사운드 데이터 헤더
-#include "GroundCheck.h"		// 충돌 관련 헤더
+#include "screen.h"			// 렌더링 처리 헤더
+#include "maps.h"
+#include "object.h"
+#include "SoundManager.h"
+#include "GroundCheck.h"
 
 
 #define TRUE 1
@@ -22,16 +21,16 @@
 #define RIGHT 77
 
 int LOOP = TRUE;
-int isColide = FALSE;				// 충돌값
+int isColide = FALSE;
 int* isColide_ptr = &isColide;
 
-int isTrapped = FALSE;				// 장애물 충돌
+int isTrapped = FALSE;
 int* isTrapped_ptr = &isTrapped;
 
-int isWallHitR = FALSE;				// 오른쪽 벽 충돌
+int isWallHitR = FALSE;
 int* isWallHitR_ptr = &isWallHitR;
 
-int isWallHitL = FALSE;				// 왼쪽 벽 충돌
+int isWallHitL = FALSE;
 int* isWallHitL_ptr = &isWallHitL;
 
 clock_t curTime;
@@ -47,6 +46,14 @@ MMX platform;
 MMX fence;
 
 MMX platform_stage2_2;
+
+typedef struct {
+	float x;
+	float y;
+}saveP;
+
+saveP curPP;
+saveP prevPP;
 
 static int stage = 1;
 
@@ -66,7 +73,12 @@ void init()
 	fence.max.x = 122;	fence.max.y = 29;
 	fence.min.x = 2;	fence.min.y = 29;
 	DrawCheck(player_check, fence);
+	
+	curPP.x = player.position.x;
+	curPP.y = player.position.y;
 
+	prevPP.x = player.position.x;
+	prevPP.y = player.position.y;
 }
 
 void addDrawCheck(MMX* a, float mx, float my, float Mx)
@@ -87,7 +99,14 @@ void addDrawCheckW(MMX* a, float mx, float my, float My)
 
 void update()
 {
-	curTime = clock();
+	clock_t curTime = clock();
+	
+	prevPP.x = curPP.x;
+	prevPP.y = curPP.y;
+
+	curPP.x = player.position.x;
+	curPP.y = player.position.y;
+
 
 	//while (player.bounce.jumpTime_middle < (curTime - player.bounce.oldTime)) {
 	//
@@ -185,17 +204,15 @@ void update()
 		}
 	}
 
-	if (*isWallHitL_ptr == true)
+	/*if (*isWallHitL_ptr == true)
 	{
 		player.position.x -= 2;
-		*isWallHitL_ptr = FALSE;
 	}
 
 	if (*isWallHitR_ptr == true)
 	{
 		player.position.x += 2;
-		*isWallHitR_ptr = FALSE;
-	}
+	}*/
 }
 
 // 화면에 출력
@@ -281,9 +298,9 @@ void render()
 		// 스테이지3 불러오기
 		stage3(&platform);
 
-		MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
-		MMX t1, t2, t3, t4, t5, t6, t7, t8;
-		MMX w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16;
+		MMX map[] = 0, a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
+		MMX trap[] = 0, t1, t2, t3, t4, t5, t6, t7, t8;
+		//MMX w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16;
 
 
 		DrawCheck(player_check, platform);
@@ -413,7 +430,21 @@ void render()
 				*isColide_ptr = TRUE;
 		}
 
-		/*맵 벽면 충돌 변수 추가 오른쪽*/
+		
+
+
+
+		for (int i = 0; i < 23; i++)
+		{
+			if ((map[i + 1].min.x <= player.position.x) && (map[i + 1].max.x >= player.position.x)
+				&& (map[i + 1].min.y <= player.position.y) && (map[i + 1].max.x >= player.position.x))
+			{
+				player.position.x = prevPP.x;
+				player.position.y = prevPP.y;
+			}
+		}
+
+		/*맵 벽면 충돌 변수 추가 오른쪽
 		{addDrawCheckW(&w1, 87, 27, 29);
 		addDrawCheckW(&w3, 51, 27, 29);
 		addDrawCheckW(&w4, 43, 24, 26);
@@ -422,9 +453,9 @@ void render()
 		addDrawCheckW(&w10, 111, 9, 9);
 		addDrawCheckW(&w12, 11, 14, 15);
 		addDrawCheckW(&w14, 13, 25, 26);
-		}
+		}*/
 
-		/*맵 벽면 충돌 함수 실행 오른쪽*/
+		/*맵 벽면 충돌 함수 실행 오른쪽
 		{
 			if (DrawCheck(player_check, w1) == true)
 				*isWallHitR_ptr = TRUE;
@@ -442,9 +473,9 @@ void render()
 				*isWallHitR_ptr = TRUE;
 			if (DrawCheck(player_check, w14) == true)
 				*isWallHitR_ptr = TRUE;
-		}
+		}*/
 
-		/*맵 벽면 충돌 변수 추가 왼쪽*/
+		/*맵 벽면 충돌 변수 추가 왼쪽
 		{addDrawCheckW(&w2, 79, 27, 29);
 		addDrawCheckW(&w7, 43, 19, 20);
 		addDrawCheckW(&w8, 49, 17, 18);
@@ -453,9 +484,9 @@ void render()
 		addDrawCheckW(&w13, 7, 19, 19);
 		addDrawCheckW(&w15, 19, 18, 9);
 		addDrawCheckW(&w16, 7, 20, 29);
-		}
+		}*/
 
-		/*맵 벽면 충돌 함수 실행 오른쪽*/
+		/*맵 벽면 충돌 함수 실행 오른쪽
 		{
 			if (DrawCheck(player_check, w2) == true)
 				*isWallHitL_ptr = TRUE;
@@ -473,7 +504,7 @@ void render()
 				*isWallHitL_ptr = TRUE;
 			if (DrawCheck(player_check, w16) == true)
 				*isWallHitL_ptr = TRUE;
-		}
+		}*/
 
 
 		break;
@@ -547,7 +578,7 @@ void waitRender(clock_t oldTime)
 {
 	while (TRUE) {
 
-		curTime = clock();				// 렌더 후의 시간을 지속적으로 갱신
+		curTime = clock();			// 렌더 후의 시간을 지속적으로 갱신
 		if (10 < curTime - oldTime)			// 두 시간의 차가 (16ms - 60 fps) or (33ms - 30fps)일 때 대기상태 탈출, 10으로하니까 60프레임
 			break;
 	}
