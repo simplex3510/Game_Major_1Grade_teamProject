@@ -1,15 +1,15 @@
-#pragma once
-#pragma warning (disable:4996)
+// #Pragma 지시문은 컴퓨터 또는 운영 체제별 컴파일러 기능을 지정
+#pragma once					// 헤더의 중복을 방지함
+#pragma warning (disable:4996)	// 보안 위험 무시
 
-#include <stdio.h>			// 표준 입출력 헤더
-#include <conio.h>			// 입출력, 표준에서 벗어남
+#include <stdio.h>				// 표준 입출력 헤더
+#include <conio.h>				// 콘솔 입출력 함수 헤더, 표준에서 벗어남
 
-#include "screen.h"			// 렌더링 처리 헤더
-#include "maps.h"
-#include "object.h"
-#include "SoundManager.h"
-#include "GroundCheck.h"
-
+#include "screen.h"				// 윈도우 화면 출력 처리 헤더
+#include "maps.h"				// 맵 데이터 헤더
+#include "object.h"				// 오브젝트 데이터 헤더
+#include "SoundManager.h"		// 사운드 데이터 헤더
+#include "GroundCheck.h"		// 충돌 관련 헤더
 
 #define TRUE 1
 #define ESC 27
