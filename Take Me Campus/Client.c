@@ -21,16 +21,16 @@
 #define RIGHT 77
 
 int LOOP = TRUE;
-int isColide = FALSE;
+int isColide = FALSE;					// 플레이어 충돌체크
 int* isColide_ptr = &isColide;
 
-int isTrapped = FALSE;
+int isTrapped = FALSE;					// 가시 충돌 체크
 int* isTrapped_ptr = &isTrapped;
 
-int isWallHitR = FALSE;
+int isWallHitR = FALSE;					// 왼쪽 벽 충돌 체크
 int* isWallHitR_ptr = &isWallHitR;
 
-int isWallHitL = FALSE;
+int isWallHitL = FALSE;					// 왼쪽 벽 충돌체크
 int* isWallHitL_ptr = &isWallHitL;
 
 clock_t curTime;
@@ -38,12 +38,11 @@ clock_t oldTime;
 
 Player player;		// 플레이어 오브젝트 선언
 Object potal;		// 포탈 오브젝트 선언
-Object home;
-Object side[3];
+Object home;		// 홈 오브젝트 선언
 
-MMX player_check;
-MMX platform;
-MMX fence;
+MMX player_check;	// 플레이어 충돌체
+MMX platform;		// 플렛폼 충돌체
+MMX fence;			// 메인 프레임 출돌체
 
 MMX platform_stage2_2;
 
