@@ -11,14 +11,19 @@
 #include "SoundManager.h"		// 사운드 데이터 헤더
 #include "GroundCheck.h"		// 충돌 관련 헤더
 
-#define TRUE 1
-#define ESC 27
+#define TRUE		1
+#define ESC			27
 
-#define ARROW 224
-#define UP 72
-#define DOWN 80
-#define LEFT 75
-#define RIGHT 77
+#define SOUND_UP	91
+#define SOUND_DOWN	93
+
+#define ARROW		224
+#define UP			72
+#define DOWN		80
+#define LEFT		75
+#define RIGHT		77
+
+double volume = 0;
 
 int LOOP = TRUE;
 int isColide = FALSE;					// 플레이어 충돌체크
@@ -296,7 +301,7 @@ void render()
 		addDrawCheck(&wcs, 26.5, 23, 32.5);
 		addDrawCheck(&platform, 2, 26, 110);
 		addDrawCheckO(&platform1, 110, 27, 110, 29);
-		addDrawCheck(&cl, 11.5, 20, 25.5);
+		addDrawCheck(&cl, 9.5, 20, 25.5);
 		addDrawCheck(&f, 30.5, 17, 44.5);
 		addDrawCheck(&sos, 50.5, 14, 64.5);
 		addDrawCheck(&Iic, 70.5, 11, 84.5);
@@ -720,7 +725,11 @@ int getKeyEvent()
 		if (key1 == ESC)					// esc키 입력
 			return key1;				// 해당 키보드 값 반환
 
+		if (key1 == SOUND_UP);
+			return key1;
 
+		if (key1 == SOUND_DOWN);
+			return key1;
 
 		// --------------방향키 존---------------
 		key2 = _getch();				// 방향키 두 번째 아스키 코드 값 저장
@@ -752,6 +761,23 @@ void keyProcess(int key)
 		//printf("→");
 		player.position.x += 2;
 		break;
+
+	case SOUND_UP:
+		volume += 0.1f;
+		if (volume > 1.0f)
+			volume = 1.0f;
+		sound_bgmVolume(volume);
+		sound_effectVolume(volume);
+		break;
+
+	case SOUND_DOWN:
+		volume -= 0.1f;
+		if (volume < 0.0f)
+			volume = 0.0f;
+		sound_bgmVolume(volume);
+		sound_effectVolume(volume);
+		break;
+	
 	}
 }
 
