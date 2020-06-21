@@ -8,7 +8,6 @@
 char PLAYER_STR[] = "¡Ü";
 char POTAL_STR[] = "¡Ú";
 char HOME_STR[] = "¡Ý";
-char PLATFORM_STR[] = "¡á";
 
 void player_init(Player* player)
 {

@@ -69,7 +69,7 @@ void init()
 	fence.max.x = 122;	fence.max.y = 29;
 	fence.min.x = 2;	fence.min.y = 29;
 	DrawCheck(player_check, fence);
-	
+
 	curPP.x = player.position.x;
 	curPP.y = player.position.y;
 
@@ -96,7 +96,7 @@ void addDrawCheckW(MMX* a, float mx, float my, float My)
 void update()
 {
 	clock_t curTime = clock();
-	
+
 	prevPP.x = curPP.x;
 	prevPP.y = curPP.y;
 
@@ -129,7 +129,7 @@ void update()
 
 	if ((1 <= *isColide_ptr) && (*isColide_ptr <= 2)) {
 		while (player.bounce.jumpTime_low < (curTime - player.bounce.oldTime)) {
-			
+
 			// 최고점이 아니라면, 상승한다.
 			player.position.y -= 0.5;
 			(*isColide_ptr)++;
@@ -248,7 +248,7 @@ void render()
 
 	}
 	else if ((player.position.x == home.position.x) &&
-			 (player.position.y == home.position.y)) {
+		(player.position.y == home.position.y)) {
 		stage++;
 		object_position(&player, &potal, &home, stage);
 	}
@@ -294,9 +294,35 @@ void render()
 		// 스테이지3 불러오기
 		stage3(&platform);
 
-		MMX map[] = 0, a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
-		MMX trap[] = 0, t1, t2, t3, t4, t5, t6, t7, t8;
+		//MMX map[21] = { 0, };
+		//MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
+		//map[0] = a;			map[1] = b;			map[2] = c;			map[3] = d;
+		//map[4] = e;			map[5] = f;			map[6] = g;			map[7] = h;
+		//map[8] = i;			map[9] = j;			map[10] = k;		map[11] = l;
+		//map[12] = m;		map[12] = n;		map[13] = o;		map[14] = p;
+		//map[15] = q;		map[16] = r;		map[17] = s;		map[18] = t;
+		//map[19] = u;		map[20] = v;
+
+		//MMX trap[9] = { 0, };
+		//MMX t1, t2, t3, t4, t5, t6, t7, t8;
+		//trap[0] = t1;		trap[1] = t2;		trap[3] = t3;		trap[4] = t4;
+		//trap[5] = t5;		trap[6] = t6;		trap[7] = t7;		trap[8] = t8;
+		
 		//MMX w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16;
+
+		MMX* map[21] = { 0, };
+		MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v;
+		map[0] = &a;		map[1] = &b;		map[2] = &c;		map[3] = &d;
+		map[4] = &e;		map[5] = &f;		map[6] = &g;		map[7] = &h;
+		map[8] = &i;		map[9] = &j;		map[10] = &k;		map[11] = &l;
+		map[12] = &m;		map[12] = &n;		map[13] = &o;		map[14] = &p;
+		map[15] = &q;		map[16] = &r;		map[17] = &s;		map[18] = &t;
+		map[19] = &u;		map[20] = &v;
+
+		MMX* trap[9] = { 0, };
+		MMX t1, t2, t3, t4, t5, t6, t7, t8;
+		trap[0] = &t1;		trap[1] = &t2;		trap[3] = &t3;		trap[4] = &t4;
+		trap[5] = &t5;		trap[6] = &t6;		trap[7] = &t7;		trap[8] = &t8;
 
 
 		DrawCheck(player_check, platform);
@@ -308,7 +334,7 @@ void render()
 			*isColide_ptr = TRUE;
 
 		/*맵 이동 및 트랩 충돌 변수 추가*/
-		{addDrawCheck(&a, 104, 29, 122);
+		addDrawCheck(&a, 104, 29, 122);
 
 		addDrawCheck(&t1, 100, 29, 102);
 
@@ -349,96 +375,104 @@ void render()
 		addDrawCheck(&u, 12, 24, 12);
 
 		addDrawCheck(&v, 2, 29, 18);
-		}
+
 
 		/*맵 이동 및 트랩 충돌 함수 실행*/
+
+		if (DrawCheck(player_check, a) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, t1) == true)
+			*isTrapped_ptr = TRUE;
+
+		if (DrawCheck(player_check, b) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, c) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, t2) == true)
+			*isTrapped_ptr = TRUE;
+
+		if (DrawCheck(player_check, d) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, e) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, F) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, g) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, h) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, i) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, t3) == true)
+			*isTrapped_ptr = TRUE;
+		if (DrawCheck(player_check, j) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, t4) == true)
+			*isTrapped_ptr = TRUE;
+		if (DrawCheck(player_check, k) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, t5) == true)
+			*isTrapped_ptr = TRUE;
+		if (DrawCheck(player_check, l) == true)
+			*isColide_ptr = TRUE;
+
+
+		if (DrawCheck(player_check, m) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, n) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, o) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, t6) == true)
+			*isTrapped_ptr = TRUE;;
+		if (DrawCheck(player_check, p) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, q) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, t7) == true)
+			*isTrapped_ptr = TRUE;
+		if (DrawCheck(player_check, r) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, s) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, t) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, t8) == true)
+			*isTrapped_ptr = TRUE;
+		if (DrawCheck(player_check, u) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, v) == true)
+			*isColide_ptr = TRUE;
+
+
+
+		for (int i = 0; i < 22; i++)
 		{
-			if (DrawCheck(player_check, a) == true)
-				*isColide_ptr = TRUE;
-
-			if (DrawCheck(player_check, t1) == true)
-				*isTrapped_ptr = TRUE;
-
-			if (DrawCheck(player_check, b) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, c) == true)
-				*isColide_ptr = TRUE;
-
-			if (DrawCheck(player_check, t2) == true)
-				*isTrapped_ptr = TRUE;
-
-			if (DrawCheck(player_check, d) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, e) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, F) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, g) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, h) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, i) == true)
-				*isColide_ptr = TRUE;
-
-			if (DrawCheck(player_check, t3) == true)
-				*isTrapped_ptr = TRUE;
-			if (DrawCheck(player_check, j) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, t4) == true)
-				*isTrapped_ptr = TRUE;
-			if (DrawCheck(player_check, k) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, t5) == true)
-				*isTrapped_ptr = TRUE;
-			if (DrawCheck(player_check, l) == true)
-				*isColide_ptr = TRUE;
-
-
-			if (DrawCheck(player_check, m) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, n) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, o) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, t6) == true)
-				*isTrapped_ptr = TRUE;;
-			if (DrawCheck(player_check, p) == true)
-				*isColide_ptr = TRUE;
-
-			if (DrawCheck(player_check, q) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, t7) == true)
-				*isTrapped_ptr = TRUE;
-			if (DrawCheck(player_check, r) == true)
-				*isColide_ptr = TRUE;
-
-			if (DrawCheck(player_check, s) == true)
-				*isColide_ptr = TRUE;
-
-			if (DrawCheck(player_check, t) == true)
-				*isColide_ptr = TRUE;
-			if (DrawCheck(player_check, t8) == true)
-				*isTrapped_ptr = TRUE;
-			if (DrawCheck(player_check, u) == true)
-				*isColide_ptr = TRUE;
-
-			if (DrawCheck(player_check, v) == true)
-				*isColide_ptr = TRUE;
-		}
-
-		
-
-
-
-		for (int i = 0; i < 23; i++)
-		{
-			if ((map[i + 1].min.x <= player.position.x) && (map[i + 1].max.x >= player.position.x)
-				&& (map[i + 1].min.y <= player.position.y) && (map[i + 1].max.x >= player.position.x))
+			if ((c.min.x <= player.position.x) && (c.max.x >= player.position.x)
+				&& (c.min.y <= player.position.y) && (c.max.x >= player.position.x))
 			{
 				player.position.x = prevPP.x;
 				player.position.y = prevPP.y;
 			}
 		}
+
+
+		//for (int i = 0; i < 22; i++)
+		//{
+		//	if ((c.min.x <= player.position.x) && (c.max.x >= player.position.x)
+		//		&& (c.min.y <= player.position.y) && (c.max.x >= player.position.x))
+		//	{
+		//		player.position.x = prevPP.x;
+		//		player.position.y = prevPP.y;
+		//	}
+		//}
 
 		/*맵 벽면 충돌 변수 추가 오른쪽
 		{addDrawCheckW(&w1, 87, 27, 29);
