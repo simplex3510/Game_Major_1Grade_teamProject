@@ -93,6 +93,14 @@ void addDrawCheckW(MMX* a, float mx, float my, float My)
 	a->min.y = my;
 }
 
+void addDrawCheckO(MMX* a, float mx, float my, float Mx, float My)
+{
+	a->max.x = Mx;
+	a->max.y = My;
+	a->min.x = mx;
+	a->min.y = my;
+}
+
 void update()
 {
 	clock_t curTime = clock();
@@ -133,7 +141,8 @@ void update()
 			player.position.y -= 0.5;
 			(*isColide_ptr)++;
 			player.bounce.oldTime = curTime;	// 점프 시점 시각 업데이트
-
+			if ( *isColide_ptr == 2)
+				playEffectSound(1);
 			return;
 		}
 	}
@@ -272,27 +281,54 @@ void render()
 	case 2:
 		stage2();
 
-		MMX wcs, cl, f, sos, Iic, bscegh, dywgtc;
+		MMX platform, platform1, wcs, cl, f, sos, Iic, bscegh, dywgtc;
 
 		DrawCheck(player_check, platform_stage2_2);
 		if (DrawCheck(player_check, platform_stage2_2) == true)
 			*isColide_ptr = TRUE;
 
-		DrawCheck(player_check, platform);
-		if (DrawCheck(player_check, platform) == true)
-			*isColide_ptr = TRUE;
+
 
 		DrawCheck(player_check, fence);
 		if (DrawCheck(player_check, fence) == true)
 			*isColide_ptr = TRUE;
 
-		addDrawCheck(&wcs, 12.5, 23.5, 16.5);
-		addDrawCheck(&cl, 5, 20.5, 13);
-		addDrawCheck(&f, 15, 17.5, 23);
-		addDrawCheck(&sos, 25, 14.5, 33);
-		addDrawCheck(&Iic, 35, 11.5, 43);
-		addDrawCheck(&bscegh, 45, 8.5, 53);
-		addDrawCheck(&dywgtc, 55, 5.5, 60);
+		addDrawCheck(&wcs, 26.5, 23, 32.5);
+		addDrawCheck(&platform, 2, 26, 110);
+		addDrawCheckO(&platform1, 110, 27, 110, 29);
+		addDrawCheck(&cl, 11.5, 20, 25.5);
+		addDrawCheck(&f, 30.5, 17, 44.5);
+		addDrawCheck(&sos, 50.5, 14, 64.5);
+		addDrawCheck(&Iic, 70.5, 11, 84.5);
+		addDrawCheck(&bscegh, 89.5, 8.5, 105.5);
+		addDrawCheck(&dywgtc, 99.5, 5.5, 122);
+
+		if (DrawCheck(player_check, platform) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, platform1) == true)
+		{
+			screenPrint(player.position.x += 2, player.position.y, player.strobject);
+		}
+
+		if (DrawCheck(player_check, wcs) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, cl) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, f) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, sos) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, Iic) == true)
+			*isColide_ptr = TRUE;
+
+		if (DrawCheck(player_check, bscegh) == true)
+			*isColide_ptr = TRUE;
+		if (DrawCheck(player_check, dywgtc) == true)
+			*isColide_ptr = TRUE;
 
 		break;
 
@@ -316,14 +352,16 @@ void render()
 
 		//MMX w1, w2, w3, w4, w5, w6, w7, w8, w9, w10, w11, w12, w13, w14, w15, w16;
 
-		MMX* map[23] = { 0, };
-		MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x;
+		MMX* map[32] = { 0, };
+		MMX a, b, c, d, e, F, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y1, y2, z1, z2, e1, f1, g1, c1, c2;
 		map[0] = &a;		map[1] = &b;		map[2] = &c;		map[3] = &d;
 		map[4] = &e;		map[5] = &f;		map[6] = &g;		map[7] = &h;
 		map[8] = &i;		map[9] = &j;		map[10] = &k;		map[11] = &l;
 		map[12] = &m;		map[12] = &n;		map[13] = &o;		map[14] = &p;
 		map[15] = &q;		map[16] = &r;		map[17] = &s;		map[18] = &t;
 		map[19] = &u;		map[20] = &v;		map[21] = &w;		map[22] = &x;
+		map[23] = &y1;		map[24] = &y2;		map[25] = &z1;		map[26] = &z2;
+		map[27] = &e1;		map[28] = &f1;		map[29] = &g1;		map[30] = &c1;		map[31] = &c2;
 
 		MMX* trap[9] = { 0, };
 		MMX t1, t2, t3, t4, t5, t6, t7, t8;
@@ -339,13 +377,13 @@ void render()
 		if (DrawCheck(player_check, fence) == true)
 			*isColide_ptr = TRUE;
 
-		/*맵 이동 및 트랩 충돌 변수 추가*/
+		/*맵 이동 및 트랩 충돌 변수 초기화*/
 		{addDrawCheck(&a, 104, 29, 122);
 
 		addDrawCheck(&t1, 100, 29, 102);
 
 		addDrawCheck(&b, 88, 29, 98);
-		addDrawCheck(&c, 80, 27, 86);
+		addDrawCheck(&c, 80, 26, 86);
 
 		addDrawCheck(&t2, 78, 29, 78);
 
@@ -384,8 +422,19 @@ void render()
 		addDrawCheck(&u, 12, 24, 12);
 
 		addDrawCheck(&v, 2, 29, 18);
-		}
 
+		addDrawCheckO(&y1, 20, 9, 20, 20);
+		addDrawCheckO(&y2, 26, 9, 26, 20);
+		addDrawCheckO(&z1, 20, 21, 20, 29);
+		addDrawCheckO(&z2, 26, 21, 26, 29);
+
+		addDrawCheckO(&e1, 50, 27, 50, 29);
+		addDrawCheckO(&f1, 42, 24, 42, 26);
+		addDrawCheckO(&g1, 34, 21, 34, 23);
+
+		addDrawCheckO(&c1, 80, 27, 80, 29);
+		addDrawCheckO(&c2, 86, 27, 86, 29);
+		}
 
 		/*맵 이동 및 트랩 충돌 함수 실행*/
 		{
@@ -464,11 +513,13 @@ void render()
 
 			if (DrawCheck(player_check, v) == true)
 				*isColide_ptr = TRUE;
+
+
 		}
 
-
-
-		{if ((c.min.x < player.position.x) && (c.max.x > player.position.x)
+		// 충돌체
+		{
+		if ((c.min.x < player.position.x) && (c.max.x > player.position.x)
 			&& (c.min.y < player.position.y) && (c.max.y > player.position.y))
 		{
 			screenPrint(prevPP.x, prevPP.y, player.strobject);
@@ -543,15 +594,41 @@ void render()
 		{
 			screenPrint(prevPP.x, prevPP.y, player.strobject);
 		}
-		if ((20 < player.position.x) && (26 > player.position.x)
-			&& (9 < player.position.y) && (20 > player.position.y))
+		if (DrawCheck(player_check, y1) == true)
 		{
-			screenPrint(prevPP.x, prevPP.y, player.strobject);
+			player.position.x -= 2;
 		}
-		if ((20 < player.position.x) && (26 > player.position.x)
-			&& (21 < player.position.y) && (29 > player.position.y))
+		if (DrawCheck(player_check, y2) == true)
 		{
-			screenPrint(prevPP.x, prevPP.y, player.strobject);
+			player.position.x += 2;
+		}
+		if (DrawCheck(player_check, z1) == true)
+		{
+			player.position.x -= 2;
+		}
+		if (DrawCheck(player_check, z2) == true)
+		{
+			player.position.x += 2;
+		}
+		if (DrawCheck(player_check, e1) == true)
+		{
+			screenPrint(player.position.x += 2, player.position.y, player.strobject);
+		}
+		if (DrawCheck(player_check, f1) == true)
+		{
+			screenPrint(player.position.x += 2, player.position.y, player.strobject);
+		}
+		if (DrawCheck(player_check, g1) == true)
+		{
+			screenPrint(player.position.x += 2, player.position.y, player.strobject);
+		}
+		if (DrawCheck(player_check, c1) == true)
+		{
+			screenPrint(player.position.x -= 2, player.position.y, player.strobject);
+		}
+		if (DrawCheck(player_check, c2) == true)
+		{
+			screenPrint(player.position.x += 2, player.position.y, player.strobject);
 		}
 		}
 
@@ -714,4 +791,3 @@ int main()
 
 	return 0;
 }
-
