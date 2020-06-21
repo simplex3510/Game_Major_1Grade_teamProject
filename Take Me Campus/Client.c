@@ -65,9 +65,6 @@ void init()
 
 	sound_init();				// FMOD 초기화
 
-	for (int i = 0; i < 3; i++)
-		side_init(&side[i], i);
-
 	// 맵 프레임 충돌체
 	fence.max.x = 122;	fence.max.y = 29;
 	fence.min.x = 2;	fence.min.y = 29;

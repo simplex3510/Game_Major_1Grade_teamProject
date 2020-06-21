@@ -45,15 +45,6 @@ void home_init(Object* home)
 	return;
 }
 
-void side_init(Object* side, int plus)
-{
-	side->position.x = 110;
-	side->position.y = 28 - plus;
-
-	strcpy(side->strobject, PLATFORM_STR);
-
-	return;
-}
 
 // Æ÷Å» À§Ä¡ 
 void object_position(Player* player, Object* potal, Object* home, int stage)
