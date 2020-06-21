@@ -36,6 +36,9 @@ void sound_init()
 
 	//효과음 파일 추가하는 곳 ↓ effectSoundFileAdd("추가할 파일이름", 몇번째 효과음인지 숫자);
 	effectSoundFileAdd("펀치 표준 게임.wav", 0); //효과음 추가 예시
+	effectSoundFileAdd("바닥 충돌 효과음.wav", 1);
+	effectSoundFileAdd("별 충돌 효과음.wav", 2);
+
 }
 
 //사운드 기능 종료 함수
